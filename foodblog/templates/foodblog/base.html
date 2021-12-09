@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}FoodBlog{% endblock %}</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'foodblog/styles.css' %}">
+<link rel="icon" type="image/x-icon" href="{% static 'foodblog/images' %}/favicon.ico">
+</head>
+<body>
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left w3-opacity" style="display:none;z-index:2;width:20%;min-width:200px" id="mySidebar">
+{% block sidebar %}
+
+{% endblock %}
+</nav>
+<!-- modal (hidden by default) -->
+{% load i18n %}
+<div id="contactModal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4" style="width: 50%">
+      <header class="w3-container w3-teal">
+        <span onclick="document.getElementById('contactModal').style.display='none'"
+        class="w3-button w3-display-topright">&times;</span>
+        <h2>{% translate "Contact" %}</h2>
+      </header>
+      <div class="w3-container">
+          {% if contact_form.errors %} {# form's errors #}
+          <ul class="w3-ul">
+                  {% for err in contact_form.contact_email.errors %}
+                          <li class='w3-text-red'>
+                          {{ err }}
+                          </li>
+                  {% endfor %}
+          </ul>
+          {% endif %}
+          <form action="{% url 'foodblog:contact' %}" method="post" novalidate>
+                  {% csrf_token %}
+                  {% if contact_form.contact_email.errors %} {# field's errors #}
+                  <ul class="w3-ul">
+                          {% for err in contact_form.contact_email.errors %}
+                                  <li class='w3-text-red'>
+                                  {{ err }}
+                                  </li>
+                          {% endfor %}
+                  </ul>
+                  {% endif %}
+                  <strong><label for="{{ contact_form.contact_email.id_for_label }}">{% translate 'Your email' %}:</label></strong>
+                  <div>
+                        {{ contact_form.contact_email }}
+                  </div>
+                  <strong><label for="{{ contact_form.contact_message.id_for_label }}">{% translate 'Your message' %}:</label></strong>
+                  <div>
+                      {{ contact_form.contact_message }}
+                  </div>
+
+                  <input type="submit" class="w3-btn w3-round w3-indigo w3-section w3-sans-serif" value="{% translate 'Send' %}" />
+          </form>
+      </div>
+      <footer class="w3-container w3-teal">&nbsp;</footer>
+    </div>
+</div>
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+        {% block topbar %}
+
+        {% endblock %}
+  </div>
+</div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+        {# {% debug %} #}
+{% block content %}
+
+  {% endblock %}
+  <hr>
+  <!-- Footer -->
+  {% include './footer.html' %}
+
+<!-- End page content -->
+</div>
+
+<script src="{% static 'foodblog/main.js' %}"></script>
+</body>
+</html>

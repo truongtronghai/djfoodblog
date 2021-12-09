@@ -1,0 +1,13 @@
+{% load i18n %}
+{% get_current_language as current_lang_code %}
+{% if current_lang_code == 'en' %}
+    {% language 'vi' %}
+        <a href="{% url 'foodblog:index' %}" class="w3-bar-item w3-button">Tiếng Việt</a>
+    {% endlanguage %}
+{% elif current_lang_code == 'vi' %}
+    {% language 'en' %}
+        <a href="{% url 'foodblog:index' %}" class="w3-bar-item w3-button">English</a>
+    {% endlanguage %}
+{% else %}
+    {{ current_lang_code }}
+{% endif %}

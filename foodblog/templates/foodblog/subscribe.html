@@ -1,0 +1,24 @@
+{% load i18n %}
+<div class="w3-container w3-teal w3-round-large w3-center" id="subscribe_widget">
+        <h2 class="">{% translate "Receive my latest posts" %}</h2>
+        <form action="{% url 'foodblog:index' %}" method="post" id="subscribe-widget" novalidate>
+                {% csrf_token %}
+                <!--input name="subscribe email" id="subscribe-email" class="w3-input w3-center" type="email"/-->
+                {% if subscribe_form.subscribe_email.errors %}
+                <script>
+                        document.getElementById("subscribe_widget").scrollIntoView({behavior: 'smooth'})
+                </script>
+                <ul class="w3-ul">
+                        {% for err in subscribe_form.subscribe_email.errors %}
+                                <li>
+                                {% translate err %}
+                                </li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                
+                {{ subscribe_form.subscribe_email }}
+
+                <input type="submit" class="w3-btn w3-round w3-indigo w3-section w3-sans-serif" value="{% translate 'Subscribe' %}" />
+        </form>
+</div>

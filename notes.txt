@@ -1,0 +1,2 @@
+admin: cachepso | cachepso
+user: foodblogeditor | d6SwRvhnA3ddLHg

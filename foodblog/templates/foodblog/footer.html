@@ -1,0 +1,22 @@
+{% load i18n %}
+<footer class="w3-row-padding w3-padding-32">
+
+        <div class="w3-half">
+          <h3>{% translate "Footer" %}</h3>
+          <p>{{ options.footer_text | safe }}</p>
+          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </div>
+
+        <div class="w3-half w3-serif" id="popular-tags">
+          <h3>{% translate "Popular tags" %}</h3>
+          <p>
+            {% for t in popular_tags %}
+                    <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="no-under-line w3-tag w3-light-blue w3-text-teal w3-margin-bottom w3-hover-black w3-round">
+                        {{ t.tag | capfirst }}
+                    </a>
+            {% endfor %}
+
+          </p>
+        </div>
+
+</footer>

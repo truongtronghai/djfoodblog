@@ -1,0 +1,31 @@
+{% extends "./base.html" %}
+{% load i18n %}
+
+{% block title %}
+        My Food Blog | Tags
+{% endblock title %}
+
+{% block sidebar %}
+        <a href="javascript:void(0)" onclick="w3_close()"
+        class="w3-bar-item w3-button">{% translate "Close Menu" %}</a>
+        <a href="/foodblog" class="w3-bar-item w3-button">{% translate "Home" %}</a>
+
+        {% include "./langswitcher.html" %}
+
+{% endblock sidebar %}
+
+{% block topbar %}
+        <div class="w3-button w3-padding-16 w3-left w3-hover-teal" onclick="w3_open()">☰</div>
+        <div class="w3-right w3-padding-16"><a href="#" class="w3-button w3-hover-teal" onclick="document.getElementById('contactModal').style.display='block'">{% translate "Contact" %}</a></div>
+        <div class="w3-center w3-padding-16">{{ options.logo_text }}</div>
+{% endblock topbar %}
+
+{% block content %}
+    <div class="w3-container">
+        {% for t in tags %}
+            <span class="w3-tag w3-light-blue w3-text-teal w3-round w3-hover-black">
+                <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="no-under-line">{{ t.tag|capfirst }} ({{ t.count }})</a>
+            </span>
+        {% endfor %}
+    </div>
+{% endblock content %}
