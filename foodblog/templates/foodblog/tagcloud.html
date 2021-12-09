@@ -8,9 +8,9 @@
 {% block sidebar %}
         <a href="javascript:void(0)" onclick="w3_close()"
         class="w3-bar-item w3-button">{% translate "Close Menu" %}</a>
-        <a href="/foodblog" class="w3-bar-item w3-button">{% translate "Home" %}</a>
+        <a href="{% url 'foodblog:index' %}" class="w3-bar-item w3-button">{% translate "Home" %}</a>
 
-        {% include "./langswitcher.html" %}
+        {# include "./langswitcher.html" #}
 
 {% endblock sidebar %}
 
