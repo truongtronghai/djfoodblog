@@ -23,7 +23,7 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('', include('comingsoon.urls')),
-    path('foodblog/', include('foodblog.urls')),
+    # path('foodblog/', include('foodblog.urls')),
     path('admin/', admin.site.urls),
     # Add CKEditor URL include to your project’s urls:
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
@@ -34,6 +34,6 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # for i18n translation
 urlpatterns += i18n_patterns(
     # path('', include('comingsoon.urls')),
-    # path('foodblog/', include('foodblog.urls')),
+    path('foodblog/', include('foodblog.urls')),
     # path('admin/', admin.site.urls),
 )

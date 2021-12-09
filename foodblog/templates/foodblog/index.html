@@ -14,7 +14,7 @@
         <a href="#subscribe_widget" onclick="w3_close()" class="w3-bar-item w3-button">{% translate "Subscribe" %}</a>
         <a href="{% url 'foodblog:tagcloud' %}" onclick="w3_close()" class="w3-bar-item w3-button">{% translate "Tags" %}</a>
 
-        {# include "./langswitcher.html" #}
+        {% include "./langswitcher.html" %}
 
 {% endblock sidebar %}
 
