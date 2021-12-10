@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 # import for i18n translation
 from django.conf.urls.i18n import i18n_patterns
 
+
 urlpatterns = [
     path('', include('comingsoon.urls')),
     path('foodblog/', include('foodblog.urls')),

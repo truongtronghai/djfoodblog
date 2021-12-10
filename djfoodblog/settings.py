@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'comingsoon.apps.ComingsoonConfig',
     'foodblog.apps.FoodblogConfig',
     'ckeditor', 'ckeditor_uploader',
+    'django.contrib.sitemaps',  # sitemap app
 ]
 
 MIDDLEWARE = [
@@ -115,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'vi-vn'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 

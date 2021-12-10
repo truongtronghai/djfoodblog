@@ -1,14 +1,28 @@
 from django.urls import path
 from . import views
+# import for sitemaps
+from django.contrib.sitemaps.views import sitemap  # view for sitemap
+from .sitemaps import PostSitemap, TagcloudSitemap  # items for sitemap
 
 app_name = 'foodblog'
+
+sitemaps = {
+    "post": PostSitemap,
+    "tagcloud": TagcloudSitemap,
+}
+
 urlpatterns = [
     path('', views.index, name='index'),  # default for page number empty
     path('<int:page>', views.index, name='index'),
     path('post/<slug:slug>/', views.detail, name='detail'),
     path('thanks/<str:forwhat>', views.thanks, name='thanks'),
     path('tagcloud/', views.tagcloud, name='tagcloud'),
+    # default for page number empty
+    path('tag/<str:tag>/', views.tag, name='tag'),
     path('tag/<str:tag>/<int:page>', views.tag, name='tag'),
     path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
     path('contact/', views.contact, name='contact'),
+    # creating sitemap.xml
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
 ]

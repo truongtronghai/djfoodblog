@@ -26,7 +26,7 @@
                 <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="w3-tag w3-margin-right w3-light-blue w3-text-teal w3-hover-black w3-round w3-right no-under-line">{{ t.tag }}</a>
         {% endfor %}
         </div>
-        <h1>{{ post.title }}</h1>
+        <h1 class="w3-center">{{ post.title }}</h1>
         <div class="w3-container">
                 {{ post.content|safe }}
         </div>

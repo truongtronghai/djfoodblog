@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import format_html
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.urls import reverse
 
 
 # Create your models here.
@@ -24,6 +25,14 @@ class Tag(models.Model):
     tag = models.CharField(max_length=50)
     count = models.IntegerField(default=0)
 
+    # method get_absolute_url() return url of object. It's often used for sitemap building
+    def get_absolute_url(self):
+        return reverse('foodblog:tag', kwargs={'tag': self.tag})
+
+    # default returned value when object called
+    def __str__(self):
+        return self.tag
+
 
 class Post(models.Model):
     #  Fields
@@ -42,6 +51,9 @@ class Post(models.Model):
 
     def getImageTag(self):
         return format_html('<img src="%s" alt="%s" width="150px" > ' % (self.thumbnail.url, self.title))
+
+    def get_absolute_url(self):
+        return reverse('foodblog:detail', kwargs={'slug': self.slug})
 
 
 class Subscriber(models.Model):
