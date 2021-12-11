@@ -48,3 +48,6 @@ if settings.DEBUG is False:
 
     import mimetypes
     mimetypes.add_type("application/javascript", ".js", True)
+
+# overide 404 page
+handler404 = "foodblog.views.page404"

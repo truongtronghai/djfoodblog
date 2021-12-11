@@ -113,7 +113,8 @@ def detail(req, slug=''):
     try:
         post = Post.objects.get(slug=slug)
     except Post.DoesNotExist:
-        post = ''
+        from django.http import Http404
+        raise Http404
 
     context = {
         "options": getOptions(),
@@ -254,3 +255,7 @@ def contact(req):
         pass
 
     return HttpResponseRedirect(reverse("foodblog:index"))
+
+
+def page404(req, exception):
+    return render(req, 'foodblog/404.html', {})
