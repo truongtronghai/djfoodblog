@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 # import for Serving files uploaded by a user during development
 from django.conf import settings
-from django.conf.urls.static import static
+from django.conf.urls.static import static, serve
 # import for i18n translation
 from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
-    path('', include('comingsoon.urls')),
-    path('foodblog/', include('foodblog.urls')),
+    # path('', include('comingsoon.urls')),
+    path('', include('foodblog.urls')),
     path('admin/', admin.site.urls),
     # Add CKEditor URL include to your project’s urls:
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
@@ -34,7 +34,17 @@ urlpatterns = [
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # for i18n translation
 urlpatterns += i18n_patterns(
-    # path('', include('comingsoon.urls')),
     # path('foodblog/', include('foodblog.urls')),
     # path('admin/', admin.site.urls),
 )
+# serving for Debug=false in development
+if settings.DEBUG is False:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve,
+                {'document_root': settings.MEDIA_ROOT}),
+        re_path(r'^static/(?P<path>.*)$', serve,
+                {'document_root': settings.STATIC_ROOT}),
+    ]
+
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
