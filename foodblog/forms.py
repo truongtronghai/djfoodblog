@@ -43,3 +43,13 @@ class ContactForm(forms.Form):
                     'rows': '5',
                     })
             )
+
+
+class SearchForm(forms.Form):
+    search_text = forms.CharField(
+            widget=forms.TextInput(
+                attrs={
+                    "class": "w3-input"
+                    }),
+            help_text=gettext_lazy("Type and submit your email here")
+            )

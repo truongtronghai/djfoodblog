@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 16:05+0700\n"
+"POT-Creation-Date: 2021-12-12 20:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,44 +23,63 @@ msgid "Please type your email here"
 msgstr "Nhập email tại đây"
 
 #: .\foodblog\forms.py:13 .\foodblog\forms.py:25 .\foodblog\forms.py:37
+#: .\foodblog\forms.py:54
 msgid "Type and submit your email here"
 msgstr "Nhập và gởi email tại đây"
 
-#: .\foodblog\templates\foodblog\base.html:28
+#: .\foodblog\templates\foodblog\404.html:11
 #: .\foodblog\templates\foodblog\detail.html:10
-#: .\foodblog\templates\foodblog\index.html:23
-#: .\foodblog\templates\foodblog\tagcloud.html:19
-#: .\foodblog\templates\foodblog\thanks.html:15
-#: .\foodblog\templates\foodblog\unsubscribe.html:17
-msgid "Contact"
-msgstr "Liên hệ"
-
-#: .\foodblog\templates\foodblog\base.html:51
-msgid "Your email"
-msgstr "email"
-
-#: .\foodblog\templates\foodblog\base.html:55
-msgid "Your message"
-msgstr "Nội dung"
-
-#: .\foodblog\templates\foodblog\base.html:60
-msgid "Send"
-msgstr "Gởi"
-
-#: .\foodblog\templates\foodblog\detail.html:16
 #: .\foodblog\templates\foodblog\index.html:11
+#: .\foodblog\templates\foodblog\search.html:10
+#: .\foodblog\templates\foodblog\tag.html:10
 #: .\foodblog\templates\foodblog\tagcloud.html:10
 #: .\foodblog\templates\foodblog\thanks.html:9
 #: .\foodblog\templates\foodblog\unsubscribe.html:10
 msgid "Close Menu"
-msgstr "Đóng menu"
+msgstr "&#10006;"
 
-#: .\foodblog\templates\foodblog\detail.html:17
+#: .\foodblog\templates\foodblog\404.html:12
+#: .\foodblog\templates\foodblog\404.html:25
+#: .\foodblog\templates\foodblog\detail.html:11
+#: .\foodblog\templates\foodblog\search.html:11
+#: .\foodblog\templates\foodblog\tag.html:11
 #: .\foodblog\templates\foodblog\tagcloud.html:11
 #: .\foodblog\templates\foodblog\thanks.html:10
 #: .\foodblog\templates\foodblog\unsubscribe.html:11
 msgid "Home"
 msgstr "Trang nhà"
+
+#: .\foodblog\templates\foodblog\404.html:13
+#: .\foodblog\templates\foodblog\index.html:15
+#: .\foodblog\templates\foodblog\search.html:12
+#: .\foodblog\templates\foodblog\tag.html:12
+#: .\foodblog\templates\foodblog\unsubscribe.html:12
+msgid "Tags"
+msgstr "Thẻ"
+
+#: .\foodblog\templates\foodblog\404.html:22
+msgid "Page not found"
+msgstr "Trang muốn đến không tồn tại"
+
+#: .\foodblog\templates\foodblog\base.html:29
+msgid "Contact"
+msgstr "Liên hệ"
+
+#: .\foodblog\templates\foodblog\base.html:52
+msgid "Your email"
+msgstr "Email"
+
+#: .\foodblog\templates\foodblog\base.html:56
+msgid "Your message"
+msgstr "Nội dung"
+
+#: .\foodblog\templates\foodblog\base.html:61
+msgid "Send"
+msgstr "Gởi"
+
+#: .\foodblog\templates\foodblog\base.html:85
+msgid "Search"
+msgstr "Tìm"
 
 #: .\foodblog\templates\foodblog\footer.html:5
 msgid "Footer"
@@ -79,24 +98,27 @@ msgid "About"
 msgstr "Về tôi"
 
 #: .\foodblog\templates\foodblog\index.html:14
-#: .\foodblog\templates\foodblog\subscribe.html:21
+#: .\foodblog\templates\foodblog\subscribe.html:22
 msgid "Subscribe"
 msgstr "Đăng ký"
 
-#: .\foodblog\templates\foodblog\index.html:15
-#: .\foodblog\templates\foodblog\unsubscribe.html:12
-msgid "Tags"
-msgstr "Thẻ"
+#: .\foodblog\templates\foodblog\search.html:20
+msgid "No search result"
+msgstr "Không tìm thấy kết quả nào"
 
 #: .\foodblog\templates\foodblog\subscribe.html:3
 msgid "Receive my latest posts"
 msgstr "Đăng ký nhận bài viết mới nhất"
 
-#: .\foodblog\templates\foodblog\unsubscribe.html:23
+#: .\foodblog\templates\foodblog\tag.html:18
+msgid "No post relates to tag"
+msgstr "Không có bài viết nào gắn thẻ này"
+
+#: .\foodblog\templates\foodblog\unsubscribe.html:17
 msgid "Unsubscribe from my blog"
 msgstr "Hủy đăng ký blog của tôi"
 
-#: .\foodblog\templates\foodblog\unsubscribe.html:25
+#: .\foodblog\templates\foodblog\unsubscribe.html:19
 msgid ""
 "Very sorry about your Unsubscribing. Hope you re-think about this decision "
 "by ignoring this page."
@@ -104,7 +126,7 @@ msgstr ""
 "Rất tiếc vì bạn muốn hủy đăng ký. Hy vọng bạn sẽ thay đổi quyết định bằng "
 "cách bỏ qua trang này."
 
-#: .\foodblog\templates\foodblog\unsubscribe.html:28
+#: .\foodblog\templates\foodblog\unsubscribe.html:22
 msgid ""
 "In case of you really want to stop receiving my latest blogs, just "
 "submitting your email."
@@ -112,29 +134,29 @@ msgstr ""
 "Bạn muốn dừng nhận những bài viết mới chỉ cần gởi lại email mà bạn đã dùng "
 "đăng ký."
 
-#: .\foodblog\templates\foodblog\unsubscribe.html:43
+#: .\foodblog\templates\foodblog\unsubscribe.html:37
 msgid "UnSubscribe"
 msgstr "Hủy đăng ký"
 
-#: .\foodblog\views.py:130
+#: .\foodblog\views.py:133
 msgid "Welcome my new Subscriber"
 msgstr "Xin chào thành viên mới của blog"
 
-#: .\foodblog\views.py:131
+#: .\foodblog\views.py:134
 msgid ""
 "Thanks for subscribing our blog.<br>You will receive our latest post ASAP!"
 msgstr ""
 "Cảm ơn bạn đã đăng ký.<br>Bạn sẽ nhận được bài viết mới ngay khi được đăng "
 "lên!"
 
-#: .\foodblog\views.py:134 .\foodblog\views.py:138
+#: .\foodblog\views.py:137 .\foodblog\views.py:141
 msgid "Thank you!"
 msgstr "Cảm ơn!"
 
-#: .\foodblog\views.py:135
+#: .\foodblog\views.py:138
 msgid "Hope you will be back."
 msgstr "Hy vọng bạn sẽ quay lại với blog."
 
-#: .\foodblog\views.py:139
+#: .\foodblog\views.py:142
 msgid "Thank you but you have not subscribed my blog."
 msgstr "Cảm ơn nhưng bạn chưa đăng ký với blog này."

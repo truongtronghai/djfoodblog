@@ -22,6 +22,10 @@ urlpatterns = [
     path('tag/<str:tag>/<int:page>', views.tag, name='tag'),
     path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
     path('contact/', views.contact, name='contact'),
+    # default for query or page number empty
+    path('search/', views.search, name='search'),
+    path('search/<str:q>/', views.search, name='search'),
+    path('search/<str:q>/<int:p>', views.search, name='search'),
     # creating sitemap.xml
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

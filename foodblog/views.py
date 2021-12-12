@@ -5,7 +5,7 @@ from django.core.mail import send_mail  # using for sending email
 # using for Internationalization and Localization
 from django.utils.translation import gettext
 from .models import Tag, Post, TextBlock, Subscriber
-from .forms import SubscribeForm, UnsubscribeForm, ContactForm
+from .forms import SubscribeForm, UnsubscribeForm, ContactForm, SearchForm
 # Pagination
 from django.core.paginator import Paginator
 
@@ -63,7 +63,7 @@ def index(req, page=1):  # default number for page is 1
         page=1 : i = (1-1) * 8 = 0 => j = 0 + 8 = 8
         page=2 : i = ( 2-1 ) * 8 = 8 => j = 8 + 8 = 16
         page=3 : i = ( 3-1 ) * 8 = 16 => j = 16 + 8 = 24
-        page=n : i = (n -1) * n_per_page => j = n + 8
+        page=n : i = (n -1) * n_per_page => j = i + n_per_page
 
         '''
         i = (page - 1) * items_per_page
@@ -103,7 +103,8 @@ def index(req, page=1):  # default number for page is 1
             "current_page": current_page
         },
         "subscribe_form": form,
-        "contact_form": ContactForm(),  # contact form
+        "contact_form": ContactForm(),
+        "search_form": SearchForm(),
     }
 
     return render(req, 'foodblog/index.html', context)
@@ -120,7 +121,8 @@ def detail(req, slug=''):
         "options": getOptions(),
         "popular_tags": getTags(10),
         "post": post,
-        "contact_form": ContactForm(),  # contact form
+        "contact_form": ContactForm(),
+        "search_form": SearchForm(),
     }
     return render(req, 'foodblog/detail.html', context)
 
@@ -146,7 +148,8 @@ def thanks(req, forwhat='subscibe'):
         "popular_tags": getTags(10),
         "title": messages[forwhat]['title'],
         "message": messages[forwhat]['message'],
-        "contact_form": ContactForm(),  # contact form
+        "contact_form": ContactForm(),
+        "search_form": SearchForm(),
     }
     return render(req, 'foodblog/thanks.html', context)
 
@@ -157,6 +160,7 @@ def tagcloud(req):
         "popular_tags": getTags(10),
         "tags": getTags(),  # get all tags,
         "contact_form": ContactForm(),
+        "search_form": SearchForm(),
     }
     return render(req, 'foodblog/tagcloud.html', context)
 
@@ -181,7 +185,7 @@ def tag(req, tag='', page=1):
         page=1 : i = (1-1) * 8 = 0 => j = 0 + 8 = 8
         page=2 : i = ( 2-1 ) * 8 = 8 => j = 8 + 8 = 16
         page=3 : i = ( 3-1 ) * 8 = 16 => j = 16 + 8 = 24
-        page=n : i = (n -1) * n_per_page => j = n + 8
+        page=n : i = (n -1) * n_per_page => j = i + n_per_page
 
         '''
         i = (page - 1) * items_per_page
@@ -195,12 +199,14 @@ def tag(req, tag='', page=1):
     context = {
         "popular_tags": getTags(10),
         "options": getOptions(),
+        "tag": tag,
         "posts": {
             "paginated_posts": paginated_posts,
             "paginator": paginator,
             "current_page": current_page
         },
-        "contact_form": ContactForm(),  # contact form
+        "contact_form": ContactForm(),
+        "search_form": SearchForm(),
     }
 
     return render(req, 'foodblog/tag.html', context)
@@ -227,7 +233,8 @@ def unsubscribe(req):
         "popular_tags": getTags(10),
         "options": getOptions(),
         "unsubscribe_form": form,
-        "contact_form": ContactForm(),  # contact form
+        "contact_form": ContactForm(),
+        "search_form": SearchForm(),
     }
     return render(req, 'foodblog/unsubscribe.html', context)
 
@@ -259,3 +266,64 @@ def contact(req):
 
 def page404(req, exception):
     return render(req, 'foodblog/404.html', {})
+
+
+def search(req, q='', p=1):
+    items_per_page = 10
+
+    if req.method == "POST":
+        s_form = SearchForm(req.POST)  # create data-bound form object
+        if s_form.is_valid():
+            q = s_form.cleaned_data['search_text']
+
+    if q is None:
+        paginated_posts = None
+        current_page = None
+        paginator = None
+    else:
+        try:
+            # __icontains is field lookup
+            # but it's just case-insensitve with DB having collation which ends with _ci
+            # | is or operator
+            posts = Post.objects.filter(
+                title__icontains=q) | Post.objects.filter(content__icontains=q)
+            paginator = Paginator(posts, items_per_page)
+
+            if p < 1 or p > paginator.num_pages:
+                p = 1  # set default page for invalid page value from user
+
+            # get an instance of Page() of current page
+            current_page = paginator.page(p)
+
+            '''
+            Get paginated posts:
+            Example: items_per_page=8
+            Caculating position of posts in current page from i to j
+            page=1 : i = (1-1) * 8 = 0 => j = 0 + 8 = 8
+            page=2 : i = (2-1) * 8 = 8 => j = 8 + 8 = 16
+            page=3 : i = (3-1) * 8 = 16 => j = 16 + 8 = 24
+            page=n : i = (n-1) * n_per_page => j = i + n_per_page
+
+            '''
+            i = (p - 1) * items_per_page
+            paginated_posts = posts[i:(i+items_per_page)]
+
+        except Post.DoesNotExist:
+            paginated_posts = None
+            current_page = None
+            paginator = None
+
+    context = {
+        "popular_tags": getTags(10),
+        "options": getOptions(),
+        "query": q,
+        "posts": {
+            "paginated_posts": paginated_posts,
+            "paginator": paginator,
+            "current_page": current_page
+        },
+        "contact_form": ContactForm(),
+        "search_form": SearchForm(),
+    }
+
+    return render(req, 'foodblog/search.html', context)

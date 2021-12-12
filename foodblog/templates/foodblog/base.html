@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{% block title %}FoodBlog{% endblock %}</title>
+<title>{% block title %}Title here{% endblock %}</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +10,11 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'foodblog/styles.css' %}">
 <link rel="icon" type="image/x-icon" href="{% static 'foodblog/images' %}/favicon.ico">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left w3-opacity" style="display:none;z-index:2;width:20%;min-width:200px" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:20%;min-width:200px" id="mySidebar">
 {% block sidebar %}
 
 {% endblock %}
@@ -64,12 +65,42 @@
     </div>
 </div>
 
+
+<div id="searchModal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4" style="width: 50%">
+      <header class="w3-container w3-teal">
+        <span onclick="document.getElementById('searchModal').style.display='none'"
+        class="w3-button w3-display-topright">&times;</span>
+        <span>
+            <a href="#" class="w3-button w3-hover-teal material-icons" onclick="document.getElementById('searchModal').style.display='block'">search</a>
+        </span>
+      </header>
+      <div class="w3-container">
+          <form action="{% url 'foodblog:search' %}" method="post" novalidate>
+                  {% csrf_token %}
+                  <div>
+                        {{ search_form.search_text }}
+                  </div>
+
+                  <input type="submit" class="w3-btn w3-round w3-indigo w3-section w3-sans-serif" value="{% translate 'Search' %}" />
+          </form>
+      </div>
+      <footer class="w3-container w3-teal">&nbsp;</footer>
+    </div>
+</div>
 <!-- Top menu -->
 <div class="w3-top">
   <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-        {% block topbar %}
-
-        {% endblock %}
+      <div class="w3-button w3-padding-16 w3-left w3-hover-teal" onclick="w3_open()">☰</div>
+      <div class="w3-right w3-padding-16">
+              <span>
+                  <a href="#" class="w3-button w3-hover-teal material-icons" onclick="document.getElementById('searchModal').style.display='block'">search</a>
+              </span>
+              <span>
+                  <a href="#" class="w3-button w3-hover-teal material-icons" onclick="document.getElementById('contactModal').style.display='block'">email</a>
+              </span>
+      </div>
+      <div class="w3-center w3-padding-16">{{ options.logo_text }}</div>
   </div>
 </div>
 
