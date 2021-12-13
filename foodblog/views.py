@@ -169,7 +169,8 @@ def tag(req, tag='', page=1):
     items_per_page = 8
 
     try:
-        posts = Post.objects.filter(tags__tag=tag)  # get manytomany objects
+        posts = Post.objects.filter(tags__tag=tag.replace(
+            "-", " "))  # get manytomany objects
         paginator = Paginator(posts, items_per_page)
 
         if page < 1 or page > paginator.num_pages:
