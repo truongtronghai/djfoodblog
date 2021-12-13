@@ -168,10 +168,13 @@ def tagcloud(req):
 def tag(req, tag='', page=1):
     items_per_page = 8
 
+    # tag is slugified in URL, so I need to convert to normal string for query string
+    tag = Tag.objects.get(tag=tag.replace("-", " "))
+
     try:
         # get manytomany objects
-        # tag is slugified in URL, so I need to convert to normal string for query string
-        posts = Post.objects.filter(tags__tag=tag.replace("-", " "))
+
+        posts = Post.objects.filter(tags__tag=tag)
         paginator = Paginator(posts, items_per_page)
 
         if page < 1 or page > paginator.num_pages:
@@ -201,7 +204,7 @@ def tag(req, tag='', page=1):
     context = {
         "popular_tags": getTags(10),
         "options": getOptions(),
-        "tag": tag.replace("-", " "),
+        "tag": tag,
         "posts": {
             "paginated_posts": paginated_posts,
             "paginator": paginator,
