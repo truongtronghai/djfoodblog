@@ -13,6 +13,7 @@
 {% endblock sidebar %}
 
 {% block content %}
+        <h1>{{ tag|title }}</h1>
         {% if not posts.paginated_posts %}
         <div class="w3-panel w3-pale-green">
             <p class="w3-center">{% translate 'No post relates to tag' %}</p>
@@ -58,15 +59,15 @@
 
                 {% if posts.paginator %}
                         {% if posts.current_page.has_previous %}
-                        <a href="{% url 'foodblog:tag' tag=tag page=posts.current_page.number|add:'-1'  %}" class="w3-bar-item w3-button w3-hover-black">«</a>
+                        <a href="{% url 'foodblog:tag' tag=tag|slugify page=posts.current_page.number|add:'-1'  %}" class="w3-bar-item w3-button w3-hover-black">«</a>
                         {% endif %}
 
                         {% for p in posts.paginator.page_range %}
-                        <a href="{% url 'foodblog:tag' tag=tag page=p %}" class="w3-bar-item w3-button {% if p == posts.current_page.number %} w3-black {% else %} w3-hover-black {% endif %}">{{ p }}</a>
+                        <a href="{% url 'foodblog:tag' tag=tag|slugify page=p %}" class="w3-bar-item w3-button {% if p == posts.current_page.number %} w3-black {% else %} w3-hover-black {% endif %}">{{ p }}</a>
                         {% endfor %}
 
                         {% if posts.current_page.has_next %}
-                        <a href="{% url 'foodblog:tag' tag=tag page=posts.current_page.number|add:'1' %}" class="w3-bar-item w3-button w3-hover-black">»</a>
+                        <a href="{% url 'foodblog:tag' tag=tag|slugify page=posts.current_page.number|add:'1' %}" class="w3-bar-item w3-button w3-hover-black">»</a>
                         {% endif %}
                 {% endif %}
           </div>
