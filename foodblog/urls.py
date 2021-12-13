@@ -2,13 +2,14 @@ from django.urls import path
 from . import views
 # import for sitemaps
 from django.contrib.sitemaps.views import sitemap  # view for sitemap
-from .sitemaps import PostSitemap, TagcloudSitemap  # items for sitemap
+from .sitemaps import PostSitemap, TagcloudSitemap, StaticPageSitemap  # items for sitemap
 
 app_name = 'foodblog'
 
 sitemaps = {
     "post": PostSitemap,
     "tagcloud": TagcloudSitemap,
+    "page": StaticPageSitemap,
 }
 
 urlpatterns = [
