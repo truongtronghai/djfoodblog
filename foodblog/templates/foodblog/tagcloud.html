@@ -17,7 +17,7 @@
 {% block content %}
     <div class="w3-container">
         {% for t in tags %}
-            <span class="w3-tag w3-light-blue w3-text-teal w3-round w3-hover-black">
+            <span class="w3-tag w3-teal w3-text-white w3-round w3-hover-black w3-margin-bottom">
                 <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="no-under-line">{{ t.tag|capfirst }} ({{ t.count }})</a>
             </span>
         {% endfor %}

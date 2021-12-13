@@ -11,7 +11,7 @@
           <h3>{% translate "Popular tags" %}</h3>
           <p>
             {% for t in popular_tags %}
-                    <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="no-under-line w3-tag w3-light-blue w3-text-teal w3-margin-bottom w3-hover-black w3-round">
+                    <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="no-under-line w3-tag w3-teal w3-text-white w3-margin-bottom w3-hover-black w3-round">
                         {{ t.tag | capfirst }}
                     </a>
             {% endfor %}

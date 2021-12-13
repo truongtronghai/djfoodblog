@@ -9,6 +9,7 @@
         <a href="javascript:void(0)" onclick="w3_close()"
         class="w3-bar-item w3-button">{% translate 'Close Menu' %}</a>
         <a href="{% url 'foodblog:index' %}" class="w3-bar-item w3-button">{% translate 'Home' %}</a>
+        <a href="{% url 'foodblog:tagcloud' %}" onclick="w3_close()" class="w3-bar-item w3-button">{% translate "Tags" %}</a>
 
         {# include "./langswitcher.html" #}
 
@@ -17,7 +18,7 @@
 {% block content %}
         <div class="w3-bar">
         {% for t in post.tags.all %}
-                <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="w3-tag w3-margin-right w3-light-blue w3-text-teal w3-hover-black w3-round w3-right no-under-line">{{ t.tag }}</a>
+                <a href="{% url 'foodblog:tag' tag=t.tag|slugify page=1 %}" class="w3-tag w3-margin-right w3-teal w3-text-white w3-hover-black w3-round w3-right no-under-line">{{ t.tag }}</a>
         {% endfor %}
         </div>
         <h1 class="w3-center">{{ post.title }}</h1>
