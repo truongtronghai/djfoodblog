@@ -3,8 +3,9 @@ This file contains all Signals used in this application.
 Signals need to be stored in a seperate file name signals.py in application's folder.
 This file ( as a module ) will be loaded to application by ready() method of apps.py file.
 '''
-from django.db.models.signals import m2m_changed
+from django.db.models.signals import m2m_changed, pre_delete
 from .models import Tag, Post
+import os
 
 
 def updating_count_of_tag(sender, **kwargs):
@@ -26,5 +27,11 @@ def updating_count_of_tag(sender, **kwargs):
         tag.save()
 
 
+def delete_thumbnail_of_post(sender, **kwargs):
+    # print(kwargs['instance'].thumbnail.path)
+    os.remove(kwargs['instance'].thumbnail.path)
+
+
 # Post.tags.through is imtermidiate model for many-to-many relationship
 m2m_changed.connect(updating_count_of_tag, sender=Post.tags.through)
+pre_delete.connect(delete_thumbnail_of_post, sender=Post)

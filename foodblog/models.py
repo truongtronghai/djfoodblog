@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.html import format_html
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.urls import reverse
+import os
 
 
 # Create your models here.
@@ -54,6 +55,19 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('foodblog:detail', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        try:
+            # keep old thumnail of post before save new one
+            old_post = Post.objects.get(pk=self.id)
+
+            super().save(*args, **kwargs)  # call parent's save for new update
+
+            if str(old_post.thumbnail) != str(self.thumbnail):  # delete old thumbnail
+                # print("remove it")
+                os.remove(old_post.thumbnail.path)
+        except Post.DoesNotExist:
+            super().save(*args, **kwargs)  # call parent's save for new update
 
 
 class Subscriber(models.Model):
