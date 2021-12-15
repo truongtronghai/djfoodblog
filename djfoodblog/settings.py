@@ -156,8 +156,6 @@ EMAIL_HOST_PASSWORD = 'oxnqoyppegbqrnxi'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
 # change log of Heroku when DEBUG is False
 LOGGING = {
     'version': 1,
@@ -197,3 +195,6 @@ LOGGING = {
         },
     }
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(config=locals(), staticfiles=False, logging=False)
