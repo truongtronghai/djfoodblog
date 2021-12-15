@@ -129,7 +129,7 @@ LOCALE_PATHS = ('locale/', )
 STATIC_ROOT = "static/"
 STATIC_URL = '/static/'
 # used for heroku
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_ROOT = "media/"
 MEDIA_URL = "/media/"
