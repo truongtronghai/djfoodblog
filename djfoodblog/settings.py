@@ -126,14 +126,12 @@ LOCALE_PATHS = ('locale/', )
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))  # used for heroku
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  # used for heroku
+STATIC_ROOT = "static/"
 STATIC_URL = '/static/'
 # used for heroku
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(
-    BASE_DIR), "media")  # used for heroku
+MEDIA_ROOT = "media/"
 MEDIA_URL = "/media/"
 
 # Default primary key field type
@@ -160,4 +158,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
