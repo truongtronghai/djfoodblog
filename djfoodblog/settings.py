@@ -128,6 +128,7 @@ LOCALE_PATHS = ('locale/', )
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_ROOT = "static/"
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  # used for heroku
 
 MEDIA_ROOT = "media/"
 MEDIA_URL = "/media/"
