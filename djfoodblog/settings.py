@@ -13,7 +13,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
+
+# for Heroku
+import django_heroku
+import dj_database_url
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -22,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+gkds=r6!ysjm83puqmp(-0k*s8z2j4g254&^o3s@v1j24mky$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['beautystuffs.herokuapp.com']
 
 
 # Application definition
@@ -80,19 +86,9 @@ WSGI_APPLICATION = 'djfoodblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djfoodblogdb',
-        'USER': 'djpolluser',
-        'PASSWORD': 'djpolluser',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-
-}
-
+# config DB for Postgressql on Heroku
+DATABASES = {'default': dj_database_url.parse(
+    'postgres://yytnivdypipeed:1c9d3488897cf8f53aadcb24c42c469fb20990af0d0839a0b62a7fe0da3c1e17@ec2-54-204-128-96.compute-1.amazonaws.com:5432/d5g0jk5cuu2ve5')}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -158,3 +154,6 @@ EMAIL_HOST_USER = 'truongtronghai@gmail.com'
 EMAIL_HOST_PASSWORD = 'oxnqoyppegbqrnxi'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
