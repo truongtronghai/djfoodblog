@@ -128,8 +128,6 @@ LOCALE_PATHS = ('locale/', )
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_ROOT = "static/"
 STATIC_URL = '/static/'
-# used for heroku
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_ROOT = "media/"
 MEDIA_URL = "/media/"
