@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static, serve
 # import for i18n translation
 from django.conf.urls.i18n import i18n_patterns
+import mimetypes
 
 
 urlpatterns = [
@@ -46,8 +47,8 @@ if settings.DEBUG is False:
                 {'document_root': settings.STATIC_ROOT}),
     ]
 
-    import mimetypes
-    mimetypes.add_type("application/javascript", ".js", True)
+# add minetype for Js to fix error: Disallowed Type
+mimetypes.add_type("application/javascript", ".js", True)
 
 # overide 404 page
 handler404 = "foodblog.views.page404"
