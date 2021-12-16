@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static, serve
 # import for i18n translation
 from django.conf.urls.i18n import i18n_patterns
+import mimetypes
 
 
 urlpatterns = [
@@ -28,6 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Add CKEditor URL include to your project’s urls:
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    # add debug debug_toolbar
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 # Serving files uploaded by a user during development
@@ -46,8 +49,8 @@ if settings.DEBUG is False:
                 {'document_root': settings.STATIC_ROOT}),
     ]
 
-    import mimetypes
-    mimetypes.add_type("application/javascript", ".js", True)
+# add minetype for Js in case of browser prevent from a disallowed MIME type
+mimetypes.add_type("application/javascript", ".js", True)
 
 # overide 404 page
 handler404 = "foodblog.views.page404"

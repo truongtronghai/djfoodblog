@@ -26,6 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'foodblog.apps.FoodblogConfig',
     'ckeditor', 'ckeditor_uploader',
     'django.contrib.sitemaps',  # sitemap app
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # add debug_toolbar
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'djfoodblog.urls'
