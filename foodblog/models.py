@@ -65,7 +65,10 @@ class Post(models.Model):
 
             if str(old_post.thumbnail) != str(self.thumbnail):  # delete old thumbnail
                 # print("remove it")
-                os.remove(old_post.thumbnail.path)
+                try:
+                    os.remove(old_post.thumbnail.path)
+                except OSError as err:
+                    print(err)
         except Post.DoesNotExist:
             super().save(*args, **kwargs)  # call parent's save for new update
 

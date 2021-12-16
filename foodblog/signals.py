@@ -28,8 +28,11 @@ def updating_count_of_tag(sender, **kwargs):
 
 
 def delete_thumbnail_of_post(sender, **kwargs):
-    # print(kwargs['instance'].thumbnail.path)
-    os.remove(kwargs['instance'].thumbnail.path)
+    try:
+        os.remove(kwargs['instance'].thumbnail.path)
+    except OSError as err:
+        print("Cannot delete %s because error: %s" %
+              (kwargs['instance'].thumbnail.path, err))
 
 
 # Post.tags.through is imtermidiate model for many-to-many relationship
