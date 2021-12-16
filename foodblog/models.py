@@ -24,11 +24,12 @@ class TextBlock(models.Model):
 
 class Tag(models.Model):
     tag = models.CharField(max_length=50)
+    slug = models.SlugField(default='no-slug')
     count = models.IntegerField(default=0)
 
     # method get_absolute_url() return url of object. It's often used for sitemap building
     def get_absolute_url(self):
-        return reverse('foodblog:tag', kwargs={'tag': self.tag})
+        return reverse('foodblog:tag', kwargs={'slug': self.slug})
 
     # default returned value when object called
     def __str__(self):

@@ -165,11 +165,11 @@ def tagcloud(req):
     return render(req, 'foodblog/tagcloud.html', context)
 
 
-def tag(req, tag='', page=1):
+def tag(req, slug='', page=1):
     items_per_page = 8
 
-    # tag is slugified in URL, so I need to convert to normal string for query string
-    tag = Tag.objects.get(tag=tag.replace("-", " "))
+    # tag is slugified in URL, so I need to get to normal string for query string
+    tag = Tag.objects.get(slug=slug)
 
     try:
         # get manytomany objects

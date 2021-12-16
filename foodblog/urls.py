@@ -19,8 +19,8 @@ urlpatterns = [
     path('thanks/<str:forwhat>', views.thanks, name='thanks'),
     path('tagcloud/', views.tagcloud, name='tagcloud'),
     # default for page number empty
-    path('tag/<str:tag>/', views.tag, name='tag'),
-    path('tag/<str:tag>/<int:page>', views.tag, name='tag'),
+    path('tag/<slug:slug>/', views.tag, name='tag'),
+    path('tag/<slug:slug>/<int:page>', views.tag, name='tag'),
     path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
     path('contact/', views.contact, name='contact'),
     # default for query or page number empty
