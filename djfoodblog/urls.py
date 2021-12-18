@@ -52,3 +52,7 @@ mimetypes.add_type("application/javascript", ".js", True)
 
 # overide 404 page
 handler404 = "foodblog.views.page404"
+
+# admin titles
+admin.site.site_header = "Administration of Staff"
+# admin.site.site_url = None
