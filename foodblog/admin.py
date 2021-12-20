@@ -19,6 +19,9 @@ class PostAdmin(admin.ModelAdmin):
         "pub_date",
         "getImageTag",
     )
+    save_on_top = True
+    search_fields = ["title", "excerpt"]
+    filter_horizontal = ["tags"]  # change layout for m2m in admin site
 
 
 class CommentAdmin(admin.ModelAdmin):

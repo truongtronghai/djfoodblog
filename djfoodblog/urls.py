@@ -49,8 +49,13 @@ if settings.DEBUG is False:
                 {'document_root': settings.STATIC_ROOT}),
     ]
 
+
 # add minetype for Js in case of browser prevent from a disallowed MIME type
 mimetypes.add_type("application/javascript", ".js", True)
 
 # overide 404 page
 handler404 = "foodblog.views.page404"
+
+# admin titles
+admin.site.site_header = "Administration of Staff"
+# admin.site.site_url = None
