@@ -46,7 +46,8 @@ def getTags(numbers=0):
 def getComments(post_id, page):
     items_per_page = 10
     try:
-        comments = Comment.objects.filter(post=post_id).order_by('-pub_date')
+        comments = Comment.objects.filter(
+            post=post_id, status="a").order_by('-pub_date')
         paginator = Paginator(comments, items_per_page)
         if page < 1 or page > paginator.num_pages:
             page = 1
@@ -135,6 +136,7 @@ def index(req, page=1):  # default number for page is 1
 
 
 def detail(req, slug='', p=1):  # p is page of comments
+
     try:
         post_detail = Post.objects.get(slug=slug)
     except Post.DoesNotExist:
@@ -145,17 +147,13 @@ def detail(req, slug='', p=1):  # p is page of comments
         # form with bound data from request
         comment_form = CommentForm(req.POST)
         if comment_form.is_valid():
-            if Comment.objects.create(
+            Comment.objects.create(
                     name=comment_form.cleaned_data["name"],
                     email=comment_form.cleaned_data["email"],
                     content=comment_form.cleaned_data["content"],
                     status="u",  # comment is always set to unapproved value
-                    post=post_detail.id  # get id of current post
-                    ):
-                # redirect to a another URL:
-                return HttpResponseRedirect("detail/%s/%s" % (slug, p))
-            else:
-                pass  # not find out scenario for fail case
+                    post=post_detail
+                    )
 
     context = {
         "options": getOptions(),
@@ -166,6 +164,7 @@ def detail(req, slug='', p=1):  # p is page of comments
         "comment_form": CommentForm(),
         "comments": getComments(post_detail.id, p)
     }
+
     return render(req, 'foodblog/detail.html', context)
 
 

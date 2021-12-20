@@ -74,6 +74,6 @@ class CommentForm(forms.Form):
                         attrs={
                             'class': 'w3-input',
                             'rows': '5',
-                            "placeholder": gettext_lazy("Your comment")
+                            # "placeholder": gettext_lazy("Your comment")
                             })
             )

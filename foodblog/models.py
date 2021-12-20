@@ -94,8 +94,8 @@ class Comment(models.Model):
     content = models.TextField()
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default="u")
-    post = models.ForeignKey("Post", on_delete=models.CASCADE)
-    pub_date = models.DateTimeField(default=timezone.now())
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name
