@@ -70,7 +70,7 @@
         <div class="w3-panel w3-teal">
           <h5>{% translate "Your comment" %}</h5>
         </div>
-        <form action="" method="post" novalidate>
+        <form action="" method="post">
             {% csrf_token %}
             <ul class="w3-ul">
                     {% for err in comment_form.email.errors %}
@@ -79,8 +79,18 @@
                             </li>
                     {% endfor %}
             </ul>
-
-            {{ comment_form }}
+            <p>
+                <label for="{{ comment_form.name.id_for_label }}"><b>{% translate 'Name' %}</b>:</label>
+                {{ comment_form.name }}
+            </p>
+            <p>
+                <label for="{{ comment_form.email.id_for_label }}"><b>{% translate 'Your email' %}</b>:</label>
+                {{ comment_form.email }}
+            </p>
+            <p>
+                <label for="{{ comment_form.content.id_for_label }}"><b>{% translate 'Your message' %}</b>:</label>
+                {{ comment_form.content }}
+            </p>
 
             <input type="submit" class="w3-btn w3-round w3-teal w3-section" value="{% translate 'comment'|capfirst %}" />
         </form>

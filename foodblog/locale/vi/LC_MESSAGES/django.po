@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-20 20:46+0700\n"
+"POT-Creation-Date: 2021-12-20 23:03+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,10 +67,12 @@ msgid "Contact"
 msgstr "Liên hệ"
 
 #: .\foodblog\templates\foodblog\base.html:52
+#: .\foodblog\templates\foodblog\detail.html:87
 msgid "Your email"
 msgstr "Email"
 
 #: .\foodblog\templates\foodblog\base.html:56
+#: .\foodblog\templates\foodblog\detail.html:91
 msgid "Your message"
 msgstr "Nội dung"
 
@@ -82,19 +84,23 @@ msgstr "Gởi"
 msgid "Search"
 msgstr "Tìm"
 
-#: .\foodblog\templates\foodblog\detail.html:33
+#: .\foodblog\templates\foodblog\detail.html:34
 msgid "Everyone comments"
 msgstr "Bình luận của mọi người"
 
-#: .\foodblog\templates\foodblog\detail.html:45
+#: .\foodblog\templates\foodblog\detail.html:46
 msgid "No comment yet. Let yours be the first one!"
 msgstr "Chưa có bình luận nào. Bạn hãy là người đầu tiên."
 
-#: .\foodblog\templates\foodblog\detail.html:70
+#: .\foodblog\templates\foodblog\detail.html:71
 msgid "Your comment"
 msgstr "Ý kiến của bạn"
 
-#: .\foodblog\templates\foodblog\detail.html:84
+#: .\foodblog\templates\foodblog\detail.html:83
+msgid "Name"
+msgstr "Tên"
+
+#: .\foodblog\templates\foodblog\detail.html:95
 msgid "comment"
 msgstr "bình luận"
 
@@ -177,3 +183,6 @@ msgstr "Hy vọng bạn sẽ quay lại với blog."
 #: .\foodblog\views.py:183
 msgid "Thank you but you have not subscribed my blog."
 msgstr "Cảm ơn nhưng bạn chưa đăng ký với blog này."
+
+#~ msgid "Your name"
+#~ msgstr "Tên"

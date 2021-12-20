@@ -147,13 +147,16 @@ def detail(req, slug='', p=1):  # p is page of comments
         # form with bound data from request
         comment_form = CommentForm(req.POST)
         if comment_form.is_valid():
-            Comment.objects.create(
+            if Comment.objects.create(
                     name=comment_form.cleaned_data["name"],
                     email=comment_form.cleaned_data["email"],
                     content=comment_form.cleaned_data["content"],
                     status="u",  # comment is always set to unapproved value
                     post=post_detail
-                    )
+                    ):
+                return HttpResponseRedirect('')
+            else:
+                pass
 
     context = {
         "options": getOptions(),
