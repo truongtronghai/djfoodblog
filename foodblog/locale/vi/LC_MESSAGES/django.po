@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 20:14+0700\n"
+"POT-Creation-Date: 2021-12-20 20:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,6 +50,7 @@ msgid "Home"
 msgstr "Trang nhà"
 
 #: .\foodblog\templates\foodblog\404.html:13
+#: .\foodblog\templates\foodblog\detail.html:12
 #: .\foodblog\templates\foodblog\index.html:15
 #: .\foodblog\templates\foodblog\search.html:12
 #: .\foodblog\templates\foodblog\tag.html:12
@@ -81,6 +82,22 @@ msgstr "Gởi"
 msgid "Search"
 msgstr "Tìm"
 
+#: .\foodblog\templates\foodblog\detail.html:33
+msgid "Everyone comments"
+msgstr "Bình luận của mọi người"
+
+#: .\foodblog\templates\foodblog\detail.html:45
+msgid "No comment yet. Let yours be the first one!"
+msgstr "Chưa có bình luận nào. Bạn hãy là người đầu tiên."
+
+#: .\foodblog\templates\foodblog\detail.html:70
+msgid "Your comment"
+msgstr "Ý kiến của bạn"
+
+#: .\foodblog\templates\foodblog\detail.html:84
+msgid "comment"
+msgstr "bình luận"
+
 #: .\foodblog\templates\foodblog\footer.html:5
 msgid "Footer"
 msgstr "Thông tin cuối trang"
@@ -110,7 +127,7 @@ msgstr "Không tìm thấy kết quả nào"
 msgid "Receive my latest posts"
 msgstr "Đăng ký nhận bài viết mới nhất"
 
-#: .\foodblog\templates\foodblog\tag.html:18
+#: .\foodblog\templates\foodblog\tag.html:19
 msgid "No post relates to tag"
 msgstr "Không có bài viết nào gắn thẻ này"
 
@@ -138,25 +155,25 @@ msgstr ""
 msgid "UnSubscribe"
 msgstr "Hủy đăng ký"
 
-#: .\foodblog\views.py:133
+#: .\foodblog\views.py:174
 msgid "Welcome my new Subscriber"
 msgstr "Xin chào thành viên mới của blog"
 
-#: .\foodblog\views.py:134
+#: .\foodblog\views.py:175
 msgid ""
 "Thanks for subscribing our blog.<br>You will receive our latest post ASAP!"
 msgstr ""
 "Cảm ơn bạn đã đăng ký.<br>Bạn sẽ nhận được bài viết mới ngay khi được đăng "
 "lên!"
 
-#: .\foodblog\views.py:137 .\foodblog\views.py:141
+#: .\foodblog\views.py:178 .\foodblog\views.py:182
 msgid "Thank you!"
 msgstr "Cảm ơn!"
 
-#: .\foodblog\views.py:138
+#: .\foodblog\views.py:179
 msgid "Hope you will be back."
 msgstr "Hy vọng bạn sẽ quay lại với blog."
 
-#: .\foodblog\views.py:142
+#: .\foodblog\views.py:183
 msgid "Thank you but you have not subscribed my blog."
 msgstr "Cảm ơn nhưng bạn chưa đăng ký với blog này."
