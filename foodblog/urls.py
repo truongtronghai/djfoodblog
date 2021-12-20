@@ -15,7 +15,10 @@ sitemaps = {
 urlpatterns = [
     path('', views.index, name='index'),  # default for page number empty
     path('<int:page>', views.index, name='index'),
+
     path('post/<slug:slug>/', views.detail, name='detail'),
+    path('post/<slug:slug>/<int:p>', views.detail, name='detail'),
+
     path('thanks/<str:forwhat>', views.thanks, name='thanks'),
     path('tagcloud/', views.tagcloud, name='tagcloud'),
     # default for page number empty

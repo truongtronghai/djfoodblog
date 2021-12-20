@@ -25,6 +25,34 @@
         <div class="w3-container">
                 {{ post.content|safe }}
         </div>
+        <hr />
+        {# Section of Comments #}
+
+        {% if comments is not None %}
+
+        <!-- Pagination -->
+        <div class="w3-center w3-padding-32">
+          <div class="w3-bar">
+
+                {% if comments.comment_paginator %}
+                        {% if comments.comment_current_page.has_previous %}
+                        <a href="{% url 'foodblog:detail'  comments.comment_current_page.number|add:'-1'  %}" class="w3-bar-item w3-button w3-hover-black">«</a>
+                        {% endif %}
+
+                        {% for p in comments.comment_paginator.page_range %}
+                        <a href="{% url 'foodblog:detail' p %}" class="w3-bar-item w3-button {% if p == comments.comment_current_page.number %} w3-black {% else %} w3-hover-black {% endif %}">{{ p }}</a>
+                        {% endfor %}
+
+                        {% if comments.comment_current_page.has_next %}
+                        <a href="{% url 'foodblog:detail' comments.comment_current_page.number|add:'1' %}" class="w3-bar-item w3-button w3-hover-black">»</a>
+                        {% endif %}
+                {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {{ comment_form }}
+
 {% endblock content %}
 
 {% include './footer.html' %}

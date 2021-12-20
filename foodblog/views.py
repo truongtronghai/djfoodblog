@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.core.mail import send_mail  # using for sending email
 # using for Internationalization and Localization
 from django.utils.translation import gettext
-from .models import Tag, Post, TextBlock, Subscriber
-from .forms import SubscribeForm, UnsubscribeForm, ContactForm, SearchForm
+from .models import Tag, Post, TextBlock, Subscriber, Comment
+from .forms import SubscribeForm, UnsubscribeForm, ContactForm, SearchForm, CommentForm
 # Pagination
 from django.core.paginator import Paginator
 
@@ -41,7 +41,31 @@ def getTags(numbers=0):
     return tags
 
 
+# Function gets comments of post with specific page
+# And return page object and Paginator of those comments
+def getComments(post_id, page):
+    items_per_page = 10
+    try:
+        comments = Comment.objects.filter(post=post_id).order_by('-pub_date')
+        paginator = Paginator(comments, items_per_page)
+        if page < 1 or page > paginator.num_pages:
+            page = 1
+        current_page = paginator.page(page)  # get page object of current page
+
+        i = (page - 1) * items_per_page
+        paginated_comments = comments[i:(i+items_per_page)]
+
+    except Comment.DoesNotExist:
+        return {}
+
+    return {
+        "paginated_comments": paginated_comments,
+        "comment_paginator": paginator,
+        "comment_current_page": current_page
+    }
 # Create your views here.
+
+
 def index(req, page=1):  # default number for page is 1
 
     items_per_page = 8
@@ -110,19 +134,37 @@ def index(req, page=1):  # default number for page is 1
     return render(req, 'foodblog/index.html', context)
 
 
-def detail(req, slug=''):
+def detail(req, slug='', p=1):  # p is page of comments
     try:
-        post = Post.objects.get(slug=slug)
+        post_detail = Post.objects.get(slug=slug)
     except Post.DoesNotExist:
         from django.http import Http404
         raise Http404
 
+    if req.method == 'POST':
+        # form with bound data from request
+        comment_form = CommentForm(req.POST)
+        if comment_form.is_valid():
+            if Comment.objects.create(
+                    name=comment_form.cleaned_data["name"],
+                    email=comment_form.cleaned_data["email"],
+                    content=comment_form.cleaned_data["content"],
+                    status="u",  # comment is always set to unapproved value
+                    post=post_detail.id  # get id of current post
+                    ):
+                # redirect to a another URL:
+                return HttpResponseRedirect("detail/%s/%s" % (slug, p))
+            else:
+                pass  # not find out scenario for fail case
+
     context = {
         "options": getOptions(),
         "popular_tags": getTags(10),
-        "post": post,
+        "post": post_detail,
         "contact_form": ContactForm(),
         "search_form": SearchForm(),
+        "comment_form": CommentForm(),
+        "comments": getComments(post_detail.id, p)
     }
     return render(req, 'foodblog/detail.html', context)
 

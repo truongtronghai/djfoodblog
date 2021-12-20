@@ -53,3 +53,27 @@ class SearchForm(forms.Form):
                     }),
             help_text=gettext_lazy("Type and submit your email here")
             )
+
+
+class CommentForm(forms.Form):
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={
+            "class": "w3-input",
+            # "placeholder": gettext_lazy("Please type your name here")
+            })
+    )
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={
+            "class": "w3-input",
+            "type": "email",
+            # "placeholder": gettext_lazy("Please type your email here")
+            })
+    )
+    content = forms.CharField(
+        widget=forms.Textarea(
+                        attrs={
+                            'class': 'w3-input',
+                            'rows': '5',
+                            "placeholder": gettext_lazy("Your comment")
+                            })
+            )
