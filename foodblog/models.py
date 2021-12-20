@@ -3,6 +3,7 @@ from django.utils.html import format_html
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.urls import reverse
 import os
+from django.utils import timezone
 
 
 # Create your models here.
@@ -78,3 +79,22 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.sub_email
+
+
+class Comment(models.Model):
+    STATUS_CHOICES = [
+        ("a", "approved"),
+        ("u", "unapproved"),
+        ("s", "spam"),
+        ("t", "trash")
+    ]
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    content = models.TextField()
+    status = models.CharField(
+        max_length=1, choices=STATUS_CHOICES, default="u")
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default=timezone.now())
+
+    def __str__(self):
+        return self.name

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, TextBlock, Tag, Subscriber
+from .models import Post, TextBlock, Tag, Subscriber, Comment
 
 
 class TextBlockAdmin(admin.ModelAdmin):
@@ -21,8 +21,32 @@ class PostAdmin(admin.ModelAdmin):
     )
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "email",
+        "content",
+        "status"
+    )
+
+    def approve(self, request, queryset):
+        queryset.update(status="a")
+
+    def spam(self, request, queryset):
+        queryset.update(status="s")
+
+    def trash(self, request, queryset):
+        queryset.update(status="t")
+
+    def unapprove(self, request, queryset):
+        queryset.update(status="u")
+
+    actions = [approve, unapprove, spam, trash]
+
+
 # Register your models here.
 admin.site.register(Post, PostAdmin)
 admin.site.register(TextBlock, TextBlockAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Subscriber)
+admin.site.register(Comment, CommentAdmin)
