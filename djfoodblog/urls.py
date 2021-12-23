@@ -59,3 +59,6 @@ handler404 = "foodblog.views.page404"
 # admin titles
 admin.site.site_header = "Administration of Staff"
 # admin.site.site_url = None
+admin.site.site_title = "Administration of Staff"
+
+admin.sites.AdminSite.login_template = 'admin/custom-login.html'
