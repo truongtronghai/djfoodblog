@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 10, 2021 at 01:39 PM
+-- Generation Time: Feb 23, 2022 at 01:35 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE IF NOT EXISTS `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) COLLATE utf8_bin NOT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `auth_group`
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
   KEY `auth_group_permissions_group_id_b120cbf9` (`group_id`),
   KEY `auth_group_permissions_permission_id_84c5c92e` (`permission_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `auth_group_permissions`
@@ -78,13 +78,13 @@ INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
 DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE IF NOT EXISTS `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) COLLATE utf8_bin NOT NULL,
+  `codename` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   KEY `auth_permission_content_type_id_2f476e4b` (`content_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `auth_permission`
@@ -134,7 +134,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (41, 'Can add site', 11, 'add_site'),
 (42, 'Can change site', 11, 'change_site'),
 (43, 'Can delete site', 11, 'delete_site'),
-(44, 'Can view site', 11, 'view_site');
+(44, 'Can view site', 11, 'view_site'),
+(45, 'Can add comment', 12, 'add_comment'),
+(46, 'Can change comment', 12, 'change_comment'),
+(47, 'Can delete comment', 12, 'delete_comment'),
+(48, 'Can view comment', 12, 'view_comment');
 
 -- --------------------------------------------------------
 
@@ -145,27 +149,28 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE IF NOT EXISTS `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) COLLATE utf8_bin NOT NULL,
+  `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) COLLATE utf8_bin NOT NULL,
-  `first_name` varchar(150) COLLATE utf8_bin NOT NULL,
-  `last_name` varchar(150) COLLATE utf8_bin NOT NULL,
-  `email` varchar(254) COLLATE utf8_bin NOT NULL,
+  `username` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$260000$DY97RLBqlWkCgwdOwrQzmE$FbzJP1U/7YaFRkspYo0cbBrTswdQmhoGrEsnjlKT1DQ=', '2021-12-10 10:09:51.730923', 1, 'cachepso', '', '', 'truongtronghai@gmail.com', 1, 1, '2021-12-03 10:00:48.937224'),
-(2, 'pbkdf2_sha256$260000$Cxg0M3H0s6JDpgNFfl3bJp$oLOUB2zUtvNSPvh0V0Fl+qwaEmY+eW3NJawpyRHgqwA=', '2021-12-03 10:43:13.865547', 0, 'foodblogeditor', '', '', '', 1, 1, '2021-12-03 10:41:44.000000');
+(1, 'pbkdf2_sha256$260000$DY97RLBqlWkCgwdOwrQzmE$FbzJP1U/7YaFRkspYo0cbBrTswdQmhoGrEsnjlKT1DQ=', '2021-12-23 10:08:54.083231', 1, 'cachepso', '', '', 'truongtronghai@gmail.com', 1, 1, '2021-12-03 10:00:48.937224'),
+(2, 'pbkdf2_sha256$260000$Cxg0M3H0s6JDpgNFfl3bJp$oLOUB2zUtvNSPvh0V0Fl+qwaEmY+eW3NJawpyRHgqwA=', '2021-12-03 10:43:13.865547', 0, 'foodblogeditor', 'Marie', 'Curso', '', 1, 1, '2021-12-03 10:41:44.000000'),
+(3, 'pbkdf2_sha256$260000$an7tOpqqjrTNMLiR1NYAkQ$BwMnyspYmKYNwIrMkk8rYP038UuxvO4rB5x/u3pGdIw=', NULL, 0, 'john', 'john', 'Doe', 'john@gmail.com', 0, 1, '2021-12-18 07:42:40.028851');
 
 -- --------------------------------------------------------
 
@@ -182,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `auth_user_groups` (
   UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
   KEY `auth_user_groups_user_id_6a12ed8b` (`user_id`),
   KEY `auth_user_groups_group_id_97559544` (`group_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `auth_user_groups`
@@ -206,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
   UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
   KEY `auth_user_user_permissions_user_id_a95ead1b` (`user_id`),
   KEY `auth_user_user_permissions_permission_id_1fbb5f2c` (`permission_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -218,16 +223,16 @@ DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext COLLATE utf8_bin,
-  `object_repr` varchar(200) COLLATE utf8_bin NOT NULL,
+  `object_id` longtext COLLATE utf8_unicode_ci,
+  `object_repr` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `action_flag` smallint(5) UNSIGNED NOT NULL,
-  `change_message` longtext COLLATE utf8_bin NOT NULL,
+  `change_message` longtext COLLATE utf8_unicode_ci NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `django_admin_log_content_type_id_c4bce8eb` (`content_type_id`),
   KEY `django_admin_log_user_id_c564eba6` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `django_admin_log`
@@ -268,7 +273,103 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (32, '2021-12-03 10:42:34.346425', '2', 'foodblogeditor', 2, '[{\"changed\": {\"fields\": [\"Staff status\", \"Groups\"]}}]', 4, 1),
 (33, '2021-12-10 09:56:21.621412', '11', 'Beach in sunrise', 1, '[{\"added\": {}}]', 7, 1),
 (34, '2021-12-10 10:00:27.669319', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
-(35, '2021-12-10 10:10:47.103325', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Content\"]}}]', 7, 1);
+(35, '2021-12-10 10:10:47.103325', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Content\"]}}]', 7, 1),
+(36, '2021-12-13 09:15:22.876353', '6', 'Salmon For Your Skin', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(37, '2021-12-13 13:51:08.930143', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(38, '2021-12-13 13:56:26.430533', '1', 'travel', 2, '[{\"changed\": {\"fields\": [\"Count\"]}}]', 8, 1),
+(39, '2021-12-13 13:57:05.765576', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(40, '2021-12-13 13:59:00.252599', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(41, '2021-12-13 13:59:52.215495', '1', 'travel', 2, '[{\"changed\": {\"fields\": [\"Count\"]}}]', 8, 1),
+(42, '2021-12-13 14:04:35.948771', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(43, '2021-12-13 14:14:20.920360', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(44, '2021-12-13 14:16:21.242215', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(45, '2021-12-13 14:42:13.940327', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(46, '2021-12-13 14:42:55.838856', '1', 'travel', 2, '[{\"changed\": {\"fields\": [\"Count\"]}}]', 8, 1),
+(47, '2021-12-13 14:54:24.968295', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(48, '2021-12-13 14:55:11.672117', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(49, '2021-12-13 14:56:16.890094', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(50, '2021-12-13 14:56:58.454572', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(51, '2021-12-14 08:00:13.141145', '11', 'Beach in sunrise', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(52, '2021-12-14 08:01:18.417536', '11', 'Beach in sunrise', 3, '', 7, 1),
+(53, '2021-12-14 08:18:40.708227', '10', 'Ipsum Praes tinci sed', 2, '[]', 7, 1),
+(54, '2021-12-14 08:19:42.257286', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(55, '2021-12-14 08:20:55.083249', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(56, '2021-12-14 08:25:34.869611', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(57, '2021-12-14 08:27:57.836396', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(58, '2021-12-14 09:03:42.571998', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(59, '2021-12-14 09:05:16.503335', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(60, '2021-12-14 09:08:13.252651', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(61, '2021-12-14 09:09:56.088029', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(62, '2021-12-14 09:12:31.981259', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(63, '2021-12-14 09:14:16.176425', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(64, '2021-12-14 09:17:05.629078', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(65, '2021-12-14 09:30:28.150687', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(66, '2021-12-14 09:40:15.135023', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(67, '2021-12-14 09:43:45.414662', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(68, '2021-12-14 09:44:09.198870', '10', 'Ipsum Praes tinci sed', 2, '[]', 7, 1),
+(69, '2021-12-14 09:46:13.433439', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(70, '2021-12-14 09:48:10.790321', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(71, '2021-12-14 09:49:31.408789', '10', 'Ipsum Praes tinci sed', 2, '[]', 7, 1),
+(72, '2021-12-14 09:50:58.517814', '10', 'Ipsum Praes tinci sed', 2, '[]', 7, 1),
+(73, '2021-12-14 09:54:28.267490', '10', 'Ipsum Praes tinci sed', 2, '[]', 7, 1),
+(74, '2021-12-14 10:32:50.244933', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(75, '2021-12-14 10:33:27.817380', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(76, '2021-12-14 10:34:01.270989', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(77, '2021-12-14 10:34:18.450263', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(78, '2021-12-14 10:35:23.164984', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(79, '2021-12-14 10:37:11.146077', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(80, '2021-12-14 10:38:50.817381', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(81, '2021-12-14 10:39:44.525462', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(82, '2021-12-14 10:40:34.779022', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(83, '2021-12-14 10:40:57.117092', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(84, '2021-12-14 10:42:55.301866', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(85, '2021-12-14 10:44:53.684508', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(86, '2021-12-14 10:45:29.548987', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(87, '2021-12-14 10:48:10.007353', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(88, '2021-12-14 10:49:06.228835', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(89, '2021-12-14 10:50:54.970369', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(90, '2021-12-14 10:51:20.422143', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(91, '2021-12-14 10:51:59.133468', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(92, '2021-12-14 10:52:22.367510', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(93, '2021-12-14 10:53:22.197360', '10', 'Ipsum Praes tinci sed', 2, '[]', 7, 1),
+(94, '2021-12-14 10:53:56.533660', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(95, '2021-12-14 10:55:10.134467', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(96, '2021-12-14 10:55:43.658933', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(97, '2021-12-14 10:57:03.803160', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(98, '2021-12-14 10:57:51.266560', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(99, '2021-12-14 11:00:29.656265', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(100, '2021-12-14 11:00:53.978311', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(101, '2021-12-14 11:01:29.121519', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(102, '2021-12-14 11:02:05.805751', '9', 'Lorem Sed mattis nunc', 2, '[]', 7, 1),
+(103, '2021-12-14 11:02:35.975222', '9', 'Lorem Sed mattis nunc', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(104, '2021-12-14 11:03:05.276270', '10', 'Ipsum Praes tinci sed', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(105, '2021-12-14 11:05:57.970014', '10', 'Ipsum Praes tinci sed', 3, '', 7, 1),
+(106, '2021-12-14 11:07:29.516735', '10', 'Ipsum Praes tinci sed', 3, '', 7, 1),
+(107, '2021-12-14 11:08:21.286432', '9', 'Lorem Sed mattis nunc', 3, '', 7, 1),
+(108, '2021-12-14 11:15:23.946464', '12', 'What is Lorem Ipsum?', 1, '[{\"added\": {}}]', 7, 1),
+(109, '2021-12-14 11:17:04.713455', '13', 'Why do we use it?', 1, '[{\"added\": {}}]', 7, 1),
+(110, '2021-12-14 11:18:44.294933', '13', 'Why do we use it?', 2, '[{\"changed\": {\"fields\": [\"Thumbnail\"]}}]', 7, 1),
+(111, '2021-12-14 11:19:12.092505', '13', 'Why do we use it?', 3, '', 7, 1),
+(112, '2021-12-14 11:19:12.092505', '12', 'What is Lorem Ipsum?', 3, '', 7, 1),
+(113, '2021-12-14 11:24:14.522545', '8', 'Le French', 3, '', 7, 1),
+(114, '2021-12-14 11:24:14.524544', '7', 'The Perfect Sandwich, A Real Classic', 3, '', 7, 1),
+(115, '2021-12-14 11:26:21.978353', '6', 'Salmon For Your Skin', 3, '', 7, 1),
+(116, '2021-12-14 11:26:21.978353', '5', 'All I Need Is a Popsicle', 3, '', 7, 1),
+(117, '2021-12-14 11:26:46.009108', '6', 'Salmon For Your Skin', 3, '', 7, 1),
+(118, '2021-12-14 11:26:46.009108', '5', 'All I Need Is a Popsicle', 3, '', 7, 1),
+(119, '2021-12-14 11:27:37.315610', '4', 'Once Again, Robust Wine and Vegetable Pasta', 3, '', 7, 1),
+(120, '2021-12-14 11:27:37.318614', '3', 'Cherries, interrupted', 3, '', 7, 1),
+(121, '2021-12-14 11:29:04.603517', '2', 'Let Me Tell You About This Steak', 3, '', 7, 1),
+(122, '2021-12-14 11:29:04.603517', '1', 'The Perfect Sandwich, A Real NYC Classic', 3, '', 7, 1),
+(123, '2021-12-14 11:43:06.182458', '22', 'Phasellus vestibulum commodo gravida', 1, '[{\"added\": {}}]', 7, 1),
+(124, '2021-12-14 11:46:02.785328', '23', 'Nam eu sodales magna', 1, '[{\"added\": {}}]', 7, 1),
+(125, '2021-12-14 11:48:07.033346', '4', 'food', 2, '[{\"changed\": {\"fields\": [\"Count\"]}}]', 8, 1),
+(126, '2021-12-14 11:48:26.588191', '5', 'New York', 3, '', 8, 1),
+(127, '2021-12-14 11:49:10.430502', '18', 'Section 1.10.32 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC', 2, '[{\"changed\": {\"fields\": [\"Content\", \"Tags\"]}}]', 7, 1),
+(128, '2021-12-17 15:20:57.100984', '23', 'Nam eu sodales magna', 2, '[{\"changed\": {\"fields\": [\"Tags\"]}}]', 7, 1),
+(129, '2021-12-20 04:08:43.542268', '1', 'Comment object (1)', 1, '[{\"added\": {}}]', 12, 1),
+(130, '2021-12-20 04:11:21.477622', '2', 'test 2', 1, '[{\"added\": {}}]', 12, 1),
+(131, '2021-12-20 11:00:26.730773', '7', 'past continuous', 2, '[{\"changed\": {\"fields\": [\"Status\"]}}]', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -279,11 +380,11 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE IF NOT EXISTS `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) COLLATE utf8_bin NOT NULL,
-  `model` varchar(100) COLLATE utf8_bin NOT NULL,
+  `app_label` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `django_content_type`
@@ -300,7 +401,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (8, 'foodblog', 'tag'),
 (9, 'foodblog', 'textblock'),
 (10, 'foodblog', 'subscriber'),
-(11, 'sites', 'site');
+(11, 'sites', 'site'),
+(12, 'foodblog', 'comment');
 
 -- --------------------------------------------------------
 
@@ -311,11 +413,11 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE IF NOT EXISTS `django_migrations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) COLLATE utf8_bin NOT NULL,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `app` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `django_migrations`
@@ -351,7 +453,14 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (27, 'foodblog', '0009_alter_post_tags', '2021-12-03 23:40:37.373558'),
 (28, 'foodblog', '0010_subscriber', '2021-12-06 08:18:05.009212'),
 (29, 'sites', '0001_initial', '2021-12-10 08:07:44.053260'),
-(30, 'sites', '0002_alter_domain_unique', '2021-12-10 08:07:44.149444');
+(30, 'sites', '0002_alter_domain_unique', '2021-12-10 08:07:44.149444'),
+(31, 'foodblog', '0011_tag_slug', '2021-12-16 14:34:55.168055'),
+(32, 'foodblog', '0012_alter_tag_slug', '2021-12-16 14:49:02.528676'),
+(33, 'foodblog', '0011_comment', '2021-12-20 04:06:06.317715'),
+(34, 'foodblog', '0012_alter_comment_status', '2021-12-20 04:10:36.451304'),
+(35, 'foodblog', '0013_comment_pub_date', '2021-12-20 08:35:40.978124'),
+(36, 'foodblog', '0014_alter_comment_pub_date', '2021-12-20 08:37:58.294076'),
+(37, 'foodblog', '0015_merge_0012_alter_tag_slug_0014_alter_comment_pub_date', '2021-12-20 10:03:29.059242');
 
 -- --------------------------------------------------------
 
@@ -361,12 +470,20 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 
 DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE IF NOT EXISTS `django_session` (
-  `session_key` varchar(40) COLLATE utf8_bin NOT NULL,
-  `session_data` longtext COLLATE utf8_bin NOT NULL,
+  `session_key` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `session_data` longtext COLLATE utf8_unicode_ci NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('r7r83oz9wdmrsfvrzlsalf1vjw9vdkoh', '.eJxVjDsOwjAQBe_iGln-xcaU9DmDtbte4wBypDipEHeHSCmgfTPzXiLBtta0dV7SlMVFaHH63RDowW0H-Q7tNkua27pMKHdFHrTLcc78vB7u30GFXr81UUAYjOWsrUftFBsTwTtvC3tyFJwp0UREi8GBCxo4lwHPSiH6oKN4fwDpjjf0:1mzFqX:qWjo9IiYMSNSVF4IBMxdlDL2Pk2VxzwWgiJJDV9Dce0', '2022-01-03 10:24:45.720340'),
+('ji4hnwhzqr9q9x4kzlk3xa5yjf2w13i7', '.eJxVjDsOwjAQBe_iGln-xcaU9DmDtbte4wBypDipEHeHSCmgfTPzXiLBtta0dV7SlMVFaHH63RDowW0H-Q7tNkua27pMKHdFHrTLcc78vB7u30GFXr81UUAYjOWsrUftFBsTwTtvC3tyFJwp0UREi8GBCxo4lwHPSiH6oKN4fwDpjjf0:1mzGKr:0y3I79kOtoFKIelBGrUJNBZbVDLAUgzpnv_brGO2V-Q', '2022-01-03 10:56:05.574696');
 
 -- --------------------------------------------------------
 
@@ -377,11 +494,11 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 DROP TABLE IF EXISTS `django_site`;
 CREATE TABLE IF NOT EXISTS `django_site` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `domain` varchar(100) COLLATE utf8_bin NOT NULL,
-  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `domain` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_site_domain_a2e37b91_uniq` (`domain`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `django_site`
@@ -393,38 +510,72 @@ INSERT INTO `django_site` (`id`, `domain`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `foodblog_comment`
+--
+
+DROP TABLE IF EXISTS `foodblog_comment`;
+CREATE TABLE IF NOT EXISTS `foodblog_comment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `post_id` bigint(20) NOT NULL,
+  `pub_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `foodblog_comment_post_id_79fc31d1` (`post_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `foodblog_comment`
+--
+
+INSERT INTO `foodblog_comment` (`id`, `name`, `email`, `content`, `status`, `post_id`, `pub_date`) VALUES
+(1, 'test', 'test@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'a', 14, '2021-12-20 15:35:25.846104'),
+(2, 'test 2', 'test@gmail.com', 'e and scrambled it to make a type specimen book. It has survived not only five centuries, but al', 'a', 14, '2021-12-20 15:35:25.846104'),
+(3, 'hai', 'truodsf@gmail.com', 'first comment is test case', 'a', 16, '2021-12-20 10:11:05.470117'),
+(4, 'hai', 'sfjsdfio@fefwe.com', 'comment is a trivial thing but get much time', 'a', 14, '2021-12-20 10:23:34.512456'),
+(5, 'hai', 'sfjsdfio@fefwe.com', 'comment is a trivial thing but get much time', 'a', 14, '2021-12-20 10:24:23.914714'),
+(6, 'nguyen', 'nguyen@gmail.com', 'fiweofomnv\r\nfoefoewjf\r\nfoeijfoweijf', 'a', 16, '2021-12-20 10:55:49.855039'),
+(7, 'past continuous', 'pase@odifwo.com', 'be phuong nghi', 'a', 14, '2021-12-20 10:59:59.000000'),
+(8, 'teg', 'sdfsdf@dos.com', 'dfsaf', 'a', 16, '2021-12-20 16:15:12.207242'),
+(9, 'hai', 'sdofj@gmail.com', 'sdfsdfsd', 'a', 16, '2021-12-22 11:47:40.987056'),
+(10, 'hai', 'dofiwjeo@sdfsd.com', '<script>alert(1)</script>', 'a', 16, '2021-12-22 11:48:25.942450');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `foodblog_post`
 --
 
 DROP TABLE IF EXISTS `foodblog_post`;
 CREATE TABLE IF NOT EXISTS `foodblog_post` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) COLLATE utf8_bin NOT NULL,
-  `excerpt` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `slug` varchar(50) COLLATE utf8_bin NOT NULL,
-  `content` longtext COLLATE utf8_bin NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `excerpt` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
   `pub_date` datetime(6) NOT NULL,
-  `thumbnail` varchar(100) COLLATE utf8_bin NOT NULL,
+  `thumbnail` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `foodblog_post_slug_47c98c6a` (`slug`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `foodblog_post`
 --
 
 INSERT INTO `foodblog_post` (`id`, `title`, `excerpt`, `slug`, `content`, `pub_date`, `thumbnail`) VALUES
-(1, 'The Perfect Sandwich, A Real NYC Classic', 'Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.', 'the-perfect-sandwich-a-real-nyc-classic', '<p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:14:16.000000', 'sandwich.jpg'),
-(2, 'Let Me Tell You About This Steak', 'Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.', 'let-me-tell-you-about-this-steak', '<p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:14:55.000000', 'steak.jpg'),
-(3, 'Cherries, interrupted', 'Lorem ipsum text praesent tincidunt ipsum lipsum.  What else?', 'cherries-interrupted', '<p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>\r\n\r\n<p>What else?</p>', '2021-12-03 10:15:44.000000', 'cherries.jpg'),
-(4, 'Once Again, Robust Wine and Vegetable Pasta', 'Lorem ipsum text praesent tincidunt ipsum lipsum.', 'once-again-robust-wine-and-vegetable-pasta', '<p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:16:18.000000', 'wine.jpg'),
-(5, 'All I Need Is a Popsicle', 'Lorem ipsum text praesent tincidunt ipsum lipsum.', 'all-i-need-is-a-popsicle', '<p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:17:02.000000', 'popsicle.jpg'),
-(6, 'Salmon For Your Skin', 'Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.', 'salmon-for-your-skin', '<p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:17:44.000000', 'salmon.jpg'),
-(7, 'The Perfect Sandwich, A Real Classic', 'Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.', 'the-perfect-sandwich-a-real-classic', '<p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:18:38.000000', 'sandwich_7WYW5du.jpg'),
-(8, 'Le French', 'Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.', 'le-french', '<p>Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>', '2021-12-03 10:19:10.000000', 'croissant.jpg'),
-(9, 'Lorem Sed mattis nunc', 'Lorem Sed mattis nunc', 'lorem-sed-mattis-nunc', '<p>Lorem Sed mattis nunc</p>', '2021-12-02 10:20:14.000000', 'gondol.jpg'),
-(10, 'Ipsum Praes tinci sed', 'Ipsum Praes tinci sed', 'ipsum-praes-tinci-sed', '<p><strong>Sed blandit gravida diam, in aliquet urna finibus at</strong>. Etiam vel lectus ornare, dignissim dolor eu, lacinia lectus. Curabitur ac tempus justo, vitae condimentum nibh. Sed sollicitudin eu diam ut malesuada. Morbi vel facilisis risus. Duis elementum arcu ante, quis facilisis nisl hendrerit eu. Mauris sed ornare ante. Maecenas vestibulum ex vitae velit suscipit aliquam. Cras pulvinar semper nisi non condimentum. Quisque gravida sem in tempus varius. Mauris at mauris sit amet odio dictum pretium eu et lacus. Proin lorem lectus, aliquet a maximus nec, consequat a dui. Nulla vitae nisi sit amet ligula pulvinar bibendum vitae ut lorem. Nullam id tortor suscipit, mattis libero eu, interdum lorem.</p>\r\n\r\n<h2><img alt=\"\" src=\"/media/uploads/2021/11/29/workshop.jpg\" style=\"float:left; height:147px; margin:5px; width:147px\" />Maecenas fermentum imperdiet</h2>\r\n\r\n<p>Sed volutpat fringilla dui ac tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis elementum eros. Sed quis risus at nulla porta porta. Ut sit amet nisl quis felis blandit efficitur sit amet et urna. Cras vitae auctor felis. Ut finibus elit vel enim varius porttitor. Praesent vitae scelerisque dui, mollis lacinia erat. Maecenas fermentum imperdiet sem, id cursus tellus malesuada id. Aenean libero lorem, placerat et enim a, dignissim tincidunt libero. In molestie suscipit nunc, et faucibus nisi venenatis in. Maecenas eget sollicitudin nisl.</p>', '2021-12-01 10:20:44.000000', 'workshop.jpg'),
-(11, 'Beach in sunrise', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus varius justo sit amet laoreet tempus. Nulla pellentesque maximus mi id efficitur.', 'beach-in-sunrise', '<div id=\"lipsum\">\r\n<p style=\"text-align:justify\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus varius justo sit amet laoreet tempus. Nulla pellentesque maximus mi id efficitur. Nunc vel nisi hendrerit, vestibulum est pharetra, condimentum erat. Nullam fermentum fringilla ultrices. Nulla non turpis mattis, mollis tortor iaculis, molestie libero. Duis auctor, felis ac tincidunt placerat, metus lectus tincidunt justo, et interdum nunc eros sit amet ligula. Morbi condimentum dolor in quam dictum, vitae tristique est efficitur. Aliquam erat volutpat. Donec vulputate rutrum leo ut lacinia. In in sollicitudin tortor.</p>\r\n\r\n<p style=\"text-align:justify\">Cras mi tellus, posuere in leo eget, faucibus malesuada turpis. Pellentesque in lectus sit amet odio malesuada gravida. Aliquam ac purus vulputate, porta tortor eu, dapibus nisl. Integer eleifend sit amet dolor id ornare. Morbi eu dui sit amet metus tempus consectetur. Morbi sed maximus magna, eget finibus libero. Ut nec est odio. Aenean cursus arcu mi, nec condimentum tortor finibus ut.</p>\r\n\r\n<p style=\"text-align:justify\"><img alt=\"\" src=\"/media/uploads/2021/12/10/beach.jpg\" style=\"float:left; height:217px; margin:5px; width:144px\" />Nam ac pretium erat. Aliquam mattis, dui sit amet viverra finibus, libero ipsum rhoncus arcu, ac tincidunt leo nisl id erat. Praesent maximus elementum aliquet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed imperdiet dui quis urna maximus rutrum. Integer non commodo erat, a ornare nisi. Phasellus iaculis, lectus sed ullamcorper malesuada, justo velit efficitur magna, id varius metus nisi et velit. Praesent ipsum sem, hendrerit sit amet scelerisque nec, ullamcorper vel nisi. In hac habitasse platea dictumst. Aliquam et eros sit amet diam egestas facilisis. Donec ac rutrum nibh, nec consectetur purus. Sed vel dolor a nisl faucibus bibendum.</p>\r\n</div>', '2021-12-10 09:55:53.000000', 'beach.jpg');
+(15, 'The Perfect Sandwich, A Real Classic', 'Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum. ', 'sandwich', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.', '2021-12-14 18:31:13.000000', 'sandwich.jpg'),
+(14, 'Le French', 'Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum. ', 'le-french', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2021-12-14 18:31:13.000000', 'cherries.jpg'),
+(16, 'Where can I get some?', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form', 'where-can-i', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', '2021-12-14 18:34:44.000000', 'croissant.jpg'),
+(17, 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'standard', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2021-12-14 18:34:44.000000', 'popsicle.jpg'),
+(18, 'Section 1.10.32 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC', 'm ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad min', 'section', '<p>&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?&quot;</p>', '2021-12-14 18:34:44.000000', 'salmon.jpg'),
+(19, '1914 translation by H. Rackham', 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system', 'translation', '\"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?\"', '2021-12-14 18:34:44.000000', 'steak.jpg'),
+(20, '1914 translation by H. Rackham', 'In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is', 'rackham', '\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', '2021-12-14 18:34:44.000000', 'wine.jpg'),
+(21, 'Lorem Ipsum', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', 'lorem-ipsum', ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget congue est, vel dictum metus. Nullam justo nunc, varius vitae justo ut, accumsan porta magna. Praesent cursus rhoncus ipsum, eu malesuada elit porttitor at. Donec ut massa eu mauris interdum tristique sit amet sit amet sem. Ut condimentum aliquet urna sit amet facilisis. Morbi aliquet justo condimentum lorem interdum, non ultricies ex placerat. Morbi quam est, finibus at odio quis, varius condimentum ante. Sed tempor nisl odio, ac porta tortor ullamcorper vitae. In ut diam ut justo dictum hendrerit nec ut massa. Vivamus gravida, diam non cursus commodo, leo diam placerat neque, a facilisis tortor felis et elit. Integer ac ligula varius diam sagittis condimentum. Donec orci purus, consequat ac orci a, porta eleifend erat. Donec a ultricies lorem, sit amet ornare ligula. Pellentesque blandit ipsum lacus, quis interdum diam rutrum id.\r\n\r\nPraesent non elementum neque. Duis rhoncus pretium bibendum. Pellentesque at urna sagittis, pellentesque nunc et, luctus ante. Aliquam erat volutpat. Quisque facilisis consequat magna at imperdiet. Curabitur fermentum faucibus quam vitae tincidunt. Fusce non felis eget nisi malesuada egestas quis sed sapien. Ut luctus placerat ante, eu finibus leo interdum in. Nullam non consequat sapien. Quisque iaculis odio interdum ex dignissim molestie. Phasellus tortor dolor, tempor non massa eu, ornare suscipit metus. ', '2021-12-14 18:34:44.000000', 'workshop.jpg'),
+(22, 'Phasellus vestibulum commodo gravida', 'Aliquam non leo urna. Sed mattis nisi et diam vulputate tincidunt', 'phasellus-vestibulum-commodo-gravida', '<p>Phasellus vestibulum commodo gravida. Aliquam non leo urna. Sed mattis nisi et diam vulputate tincidunt. Pellentesque ex turpis, varius ac nunc eget, rutrum dignissim odio. Aliquam eget nunc est. Praesent posuere pulvinar felis quis consequat. Cras mollis lorem et maximus euismod.</p>', '2021-12-14 11:42:49.000000', 'beach.jpg'),
+(23, 'Nam eu sodales magna', 'There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...', 'nam-eu-sodales-magna', '<p>Nam eu sodales magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla a tincidunt mauris, ac convallis erat. Morbi vel dui sed orci tempor porttitor. Donec in scelerisque lectus. Mauris scelerisque mi at malesuada vestibulum. Nulla facilisi. Maecenas convallis odio vel eros fringilla, non euismod turpis dapibus. Ut non nisi nunc. Vivamus neque metus, dictum a vehicula sit amet, ultrices eget tortor. Donec aliquam convallis semper. Fusce et bibendum nunc, ac suscipit erat.</p>\r\n\r\n<p>Aenean nec pellentesqu<img alt=\"\" src=\"/media/uploads/2021/11/29/workshop.jpg\" style=\"float:left; height:150px; margin:5px; width:150px\" />e libero, non sollicitudin eros. Donec id risus nec nibh consectetur consequat sed eget sem. Curabitur pharetra libero dolor, eget hendrerit enim molestie quis. Nam ac arcu interdum, viverra turpis a, elementum ipsum. Vivamus suscipit aliquam justo et tempus. Aenean ac sagittis tortor. Nam suscipit lorem eu elit efficitur, eget gravida mauris condimentum. Nam nec dolor eget urna dictum congue. Vivamus facilisis risus eget odio ultrices, et vehicula neque volutpat. Sed non sem vel orci auctor pretium. Sed tristique nisi eget porta porttitor.</p>', '2021-12-14 11:45:42.000000', 'tri-gau-voi-muoi-va-gung-tuoi.jpg');
 
 -- --------------------------------------------------------
 
@@ -441,23 +592,19 @@ CREATE TABLE IF NOT EXISTS `foodblog_post_tags` (
   UNIQUE KEY `foodblog_post_tags_post_id_tag_id_45bc5817_uniq` (`post_id`,`tag_id`),
   KEY `foodblog_post_tags_post_id_6a197640` (`post_id`),
   KEY `foodblog_post_tags_tag_id_43bace36` (`tag_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `foodblog_post_tags`
 --
 
 INSERT INTO `foodblog_post_tags` (`id`, `post_id`, `tag_id`) VALUES
-(9, 9, 2),
-(8, 9, 1),
-(7, 10, 1),
-(10, 9, 3),
-(11, 9, 4),
-(12, 8, 1),
-(13, 8, 2),
-(14, 8, 4),
-(15, 8, 6),
-(16, 11, 1);
+(31, 18, 9),
+(30, 18, 3),
+(29, 18, 1),
+(33, 23, 7),
+(32, 23, 8),
+(26, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -468,16 +615,19 @@ INSERT INTO `foodblog_post_tags` (`id`, `post_id`, `tag_id`) VALUES
 DROP TABLE IF EXISTS `foodblog_subscriber`;
 CREATE TABLE IF NOT EXISTS `foodblog_subscriber` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sub_email` varchar(254) COLLATE utf8_bin NOT NULL,
+  `sub_email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `foodblog_subscriber`
 --
 
 INSERT INTO `foodblog_subscriber` (`id`, `sub_email`) VALUES
-(7, 'beginningpace@gmail.com');
+(7, 'beginningpace@gmail.com'),
+(8, 'sfsodfjisdj@gado.com'),
+(9, 'hfiheiufhw@gmak.com'),
+(10, 'truongtronghai@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -488,25 +638,28 @@ INSERT INTO `foodblog_subscriber` (`id`, `sub_email`) VALUES
 DROP TABLE IF EXISTS `foodblog_tag`;
 CREATE TABLE IF NOT EXISTS `foodblog_tag` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `tag` varchar(50) COLLATE utf8_bin NOT NULL,
+  `tag` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `count` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `slug` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `foodblog_tag_slug_a5b8069a` (`slug`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `foodblog_tag`
 --
 
-INSERT INTO `foodblog_tag` (`id`, `tag`, `count`) VALUES
-(1, 'travel', 4),
-(2, 'wine', 2),
-(3, 'salmon', 1),
-(4, 'food', 2),
-(5, 'New York', 0),
-(6, 'flavor', 1),
-(7, 'cuisine', 0),
-(8, 'chicken', 0),
-(9, 'fish', 0);
+INSERT INTO `foodblog_tag` (`id`, `tag`, `count`, `slug`) VALUES
+(1, 'travel', 2, 'travel'),
+(2, 'wine', 0, 'wine'),
+(3, 'salmon', 1, 'salmon'),
+(4, 'food', 0, 'food'),
+(6, 'flavor', 0, 'flavor'),
+(7, 'cuisine', 1, 'cuisine'),
+(8, 'chicken', 1, 'chicken'),
+(9, 'fish', 1, 'fish'),
+(10, 'john', 0, 'john'),
+(11, 'Euro tour', 0, 'euro-tour');
 
 -- --------------------------------------------------------
 
@@ -517,12 +670,12 @@ INSERT INTO `foodblog_tag` (`id`, `tag`, `count`) VALUES
 DROP TABLE IF EXISTS `foodblog_textblock`;
 CREATE TABLE IF NOT EXISTS `foodblog_textblock` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) COLLATE utf8_bin NOT NULL,
-  `content` longtext COLLATE utf8_bin NOT NULL,
-  `image` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `foodblog_textblock`
