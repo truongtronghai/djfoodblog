@@ -31,7 +31,7 @@
       <div class="w3-container">
           {% if contact_form.errors %} {# form's errors #}
           <ul class="w3-ul">
-                  {% for err in contact_form.contact_email.errors %}
+                  {% for err in contact_form.errors %}
                           <li class='w3-text-red'>
                           {{ err }}
                           </li>
