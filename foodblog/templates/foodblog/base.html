@@ -11,6 +11,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'foodblog/styles.css' %}">
 <link rel="icon" type="image/x-icon" href="{% static 'foodblog/images' %}/favicon.ico">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
 <!-- Sidebar (hidden by default) -->
@@ -57,7 +60,10 @@
                   <div>
                       {{ contact_form.contact_message }}
                   </div>
+                  <div class="g-recaptcha" data-sitekey="6LewOdcdAAAAAESLE2LKBU447wtHHB7mVDa5fYGf"></div>
+                  <br/>
 
+              </br/>
                   <input type="submit" class="w3-btn w3-round w3-indigo w3-section w3-sans-serif" value="{% translate 'Send' %}" />
           </form>
       </div>
@@ -119,6 +125,8 @@
 
 <!-- End page content -->
 </div>
+
+{% include "./flashmessagesmodal.html" %}
 
 <script src="{% static 'foodblog/main.js' %}"></script>
 {# add script for save button of Pinterest when hover image #}

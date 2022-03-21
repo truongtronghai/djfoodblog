@@ -8,6 +8,12 @@ from .models import Tag, Post, TextBlock, Subscriber, Comment
 from .forms import SubscribeForm, UnsubscribeForm, ContactForm, SearchForm, CommentForm
 # Pagination
 from django.core.paginator import Paginator
+# used for reCaptcha verifying at server side
+import urllib
+import json
+from django.conf import settings
+# messages
+from django.contrib import messages
 
 
 def getOptions():
@@ -293,20 +299,40 @@ def contact(req):
         # create form and bind data form POST for it
         form = ContactForm(req.POST)
         if form.is_valid():
-            # get email address from option ( TextBlock )
-            results = send_mail(
-                "Contact from {}".format(form.cleaned_data["contact_email"]),
-                form.cleaned_data["contact_message"],
-                TextBlock.objects.get(name='email'),
-                # sending mail to myself
-                [TextBlock.objects.get(name='email').content],
-                fail_silently=False,
-                # html_message="<h1>Nothing</h1>",
-            )
-            if results > 0:
-                pass
+
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = req.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            captcha_req = urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(captcha_req)
+            captcha_result = json.loads(response.read().decode())
+            ''' End reCAPTCHA validation '''
+
+            if captcha_result['success']:
+                # get email address from option ( TextBlock )
+                results = send_mail(
+                    "Contact from {}".format(
+                        form.cleaned_data["contact_email"]),
+                    form.cleaned_data["contact_message"],
+                    TextBlock.objects.get(name='email'),
+                    # sending mail to myself
+                    [TextBlock.objects.get(name='email').content],
+                    fail_silently=False,
+                    # html_message="<h1>Nothing</h1>",
+                )
+                if results > 0:
+                    messages.success(req, gettext("Thank you!"))
+                else:
+                    messages.error(req, gettext(
+                        "Message sent failed! Please try again later!"))
             else:
-                pass
+                messages.error(req, gettext(
+                    "reCaptcha is failed! You cannot  send message."))
     else:
         pass
 

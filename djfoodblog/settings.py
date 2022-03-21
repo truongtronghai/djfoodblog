@@ -161,6 +161,8 @@ CKEDITOR_CONFIGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'truongtronghai@gmail.com'
-EMAIL_HOST_PASSWORD = 'oxnqoyppegbqrnxi'  # past the key or password app here
+EMAIL_HOST_PASSWORD = 'jvkabchjytowrpco'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+# reCaptcha Key for server
+GOOGLE_RECAPTCHA_SECRET_KEY = "6LewOdcdAAAAAN94ding21phuFCUSrHrHgeGczha"
