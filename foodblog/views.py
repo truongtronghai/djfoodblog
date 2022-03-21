@@ -9,7 +9,7 @@ from .forms import SubscribeForm, UnsubscribeForm, ContactForm, SearchForm, Comm
 # Pagination
 from django.core.paginator import Paginator
 # used for reCaptcha verifying at server side
-import urllib
+import urllib.request
 import json
 from django.conf import settings
 # messages
