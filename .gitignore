@@ -1,3 +1,6 @@
 **/__pycache__
 /media/
 /foodblog/fixtures/
+
+.env
+venv/
