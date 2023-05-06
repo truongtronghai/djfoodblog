@@ -4,15 +4,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('foodblog', '0011_comment'),
+        ("foodblog", "0011_comment"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='comment',
-            name='status',
-            field=models.CharField(choices=[('a', 'approved'), ('u', 'unapproved'), ('s', 'spam'), ('t', 'trash')], default='u', max_length=1),
+            model_name="comment",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("a", "approved"),
+                    ("u", "unapproved"),
+                    ("s", "spam"),
+                    ("t", "trash"),
+                ],
+                default="u",
+                max_length=1,
+            ),
         ),
     ]

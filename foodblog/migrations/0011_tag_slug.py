@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('foodblog', '0010_subscriber'),
+        ("foodblog", "0010_subscriber"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='tag',
-            name='slug',
-            field=models.SlugField(default=''),
+            model_name="tag",
+            name="slug",
+            field=models.SlugField(default=""),
         ),
     ]

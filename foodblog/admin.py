@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Post, TextBlock, Tag, Subscriber, Comment
+
+from .models import Comment, Post, Subscriber, Tag, TextBlock
 
 
 class TextBlockAdmin(admin.ModelAdmin):
@@ -25,12 +26,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "email",
-        "content",
-        "status"
-    )
+    list_display = ("name", "email", "content", "status")
 
     def approve(self, request, queryset):
         queryset.update(status="a")

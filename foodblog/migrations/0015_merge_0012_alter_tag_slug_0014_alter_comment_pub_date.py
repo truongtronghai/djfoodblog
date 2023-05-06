@@ -4,11 +4,9 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('foodblog', '0012_alter_tag_slug'),
-        ('foodblog', '0014_alter_comment_pub_date'),
+        ("foodblog", "0012_alter_tag_slug"),
+        ("foodblog", "0014_alter_comment_pub_date"),
     ]
 
-    operations = [
-    ]
+    operations = []

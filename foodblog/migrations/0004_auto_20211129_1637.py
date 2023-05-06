@@ -4,22 +4,21 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('foodblog', '0003_auto_20211129_1634'),
+        ("foodblog", "0003_auto_20211129_1634"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Posts',
-            new_name='Post',
+            old_name="Posts",
+            new_name="Post",
         ),
         migrations.RenameModel(
-            old_name='Tags',
-            new_name='Tag',
+            old_name="Tags",
+            new_name="Tag",
         ),
         migrations.RenameModel(
-            old_name='TextBlocks',
-            new_name='TextBlock',
+            old_name="TextBlocks",
+            new_name="TextBlock",
         ),
     ]

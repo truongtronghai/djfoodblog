@@ -5,24 +5,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('foodblog', '0001_initial'),
+        ("foodblog", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TextBlock',
+            name="TextBlock",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('content', ckeditor_uploader.fields.RichTextUploadingField()),
-                ('image', models.ImageField(blank=True, null=True, upload_to='')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("content", ckeditor_uploader.fields.RichTextUploadingField()),
+                ("image", models.ImageField(blank=True, null=True, upload_to="")),
             ],
         ),
         migrations.AlterField(
-            model_name='post',
-            name='content',
+            model_name="post",
+            name="content",
             field=ckeditor_uploader.fields.RichTextUploadingField(),
         ),
     ]

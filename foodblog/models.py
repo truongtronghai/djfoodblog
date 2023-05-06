@@ -1,23 +1,26 @@
-from django.db import models
-from django.utils.html import format_html
-from ckeditor_uploader.fields import RichTextUploadingField
-from django.urls import reverse
 import os
+
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.db import models
+from django.urls import reverse
 from django.utils import timezone
+from django.utils.html import format_html
 
 
 # Create your models here.
 class TextBlock(models.Model):
-    name = models.CharField(max_length=100, default='option')
+    name = models.CharField(max_length=100, default="option")
     title = models.CharField(max_length=100)
     content = RichTextUploadingField()
     image = models.ImageField(blank=True, null=True)
 
     def getImageTag(self):
         if self.image:
-            return format_html('<img src="%s" alt="%s" width="150px" > ' % (self.image.url, self.title))
+            return format_html(
+                '<img src="%s" alt="%s" width="150px" > ' % (self.image.url, self.title)
+            )
         else:
-            return ''
+            return ""
 
     def __str__(self):
         return self.name
@@ -25,12 +28,12 @@ class TextBlock(models.Model):
 
 class Tag(models.Model):
     tag = models.CharField(max_length=50)
-    slug = models.SlugField(default='no-slug')
+    slug = models.SlugField(default="no-slug")
     count = models.IntegerField(default=0)
 
     # method get_absolute_url() return url of object. It's often used for sitemap building
     def get_absolute_url(self):
-        return reverse('foodblog:tag', kwargs={'slug': self.slug})
+        return reverse("foodblog:tag", kwargs={"slug": self.slug})
 
     # default returned value when object called
     def __str__(self):
@@ -53,10 +56,12 @@ class Post(models.Model):
         return self.title
 
     def getImageTag(self):
-        return format_html('<img src="%s" alt="%s" width="150px" > ' % (self.thumbnail.url, self.title))
+        return format_html(
+            '<img src="%s" alt="%s" width="150px" > ' % (self.thumbnail.url, self.title)
+        )
 
     def get_absolute_url(self):
-        return reverse('foodblog:detail', kwargs={'slug': self.slug})
+        return reverse("foodblog:detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         try:
@@ -87,13 +92,12 @@ class Comment(models.Model):
         ("a", "approved"),
         ("u", "unapproved"),
         ("s", "spam"),
-        ("t", "trash")
+        ("t", "trash"),
     ]
     name = models.CharField(max_length=100)
     email = models.EmailField()
     content = models.TextField()
-    status = models.CharField(
-        max_length=1, choices=STATUS_CHOICES, default="u")
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="u")
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(default=timezone.now)
 

@@ -13,24 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include, re_path
-# import for Serving files uploaded by a user during development
-from django.conf import settings
-from django.conf.urls.static import static, serve
-# import for i18n translation
-from django.conf.urls.i18n import i18n_patterns
 import mimetypes
 
+# import for Serving files uploaded by a user during development
+from django.conf import settings
+
+# import for i18n translation
+from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import serve, static
+from django.contrib import admin
+from django.urls import include, path, re_path
 
 urlpatterns = [
     # path('', include('comingsoon.urls')),
-    path('', include('foodblog.urls')),
-    path('admin/', admin.site.urls),
+    path("", include("foodblog.urls")),
+    path("admin/", admin.site.urls),
     # Add CKEditor URL include to your project’s urls:
-    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    re_path(r"^ckeditor/", include("ckeditor_uploader.urls")),
     # add debug debug_toolbar
-    path('__debug__/', include('debug_toolbar.urls')),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 # Serving files uploaded by a user during development
@@ -43,10 +44,10 @@ urlpatterns += i18n_patterns(
 # serving for Debug=false in development
 if settings.DEBUG is False:
     urlpatterns += [
-        re_path(r'^media/(?P<path>.*)$', serve,
-                {'document_root': settings.MEDIA_ROOT}),
-        re_path(r'^static/(?P<path>.*)$', serve,
-                {'document_root': settings.STATIC_ROOT}),
+        re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
+        re_path(
+            r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}
+        ),
     ]
 
 
@@ -61,4 +62,4 @@ admin.site.site_header = "Administration of Staff"
 # admin.site.site_url = None
 admin.site.site_title = "Administration of Staff"
 
-admin.sites.AdminSite.login_template = 'admin/custom-login.html'
+admin.sites.AdminSite.login_template = "admin/custom-login.html"
